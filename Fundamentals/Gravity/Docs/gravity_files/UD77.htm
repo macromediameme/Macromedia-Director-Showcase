@@ -1,0 +1,335 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0058)http://www.director-online.com/howTo/UD_articles/UD77.html -->
+<HTML><HEAD><TITLE>Using Director Number 77</TITLE>
+<META content="pixelgeek design &amp; communications" name=Author>
+<META http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+<META content="MSHTML 5.50.3825.1300" name=GENERATOR></HEAD>
+<BODY vLink=#770000 aLink=#ff0000 link=#ff0000 bgColor=#ffffff>
+<TABLE cellSpacing=0 cellPadding=0 width=495 border=0>
+  <TBODY>
+  <TR>
+    <TD vAlign=top>
+      <P><IMG height=28 src="UD77_files/UD.gif" width=129 border=0> 
+      <TABLE cellSpacing=0 cellPadding=0 width=495 border=0>
+        <TBODY>
+        <TR>
+          <TD vAlign=top width=440><IMG height=9 
+            src="UD77_files/archiveDivLine.gif" width=440 border=0></TD>
+          <TD vAlign=top width=55 rowSpan=2><A 
+            href="http://www.director-online.com/archive.cfm?pSection=Using%20Director"><IMG 
+            height=28 src="UD77_files/archiveDiv.gif" width=55 align=bottom 
+            border=0></A></TD></TR>
+        <TR>
+          <TD vAlign=top width=440>
+            <H3><FONT face="Arial, Helvetica, sans-serif" color=#cc0000>Bodies, 
+            Rest, and Motion<SUP>1</SUP></FONT></H3>
+            <P>Newton's Laws and Euler's Method 
+            <P><FONT size=-1>by <A href="mailto:pfaff@explorescience.com">Raman 
+            Pfaff</A></FONT> </P></TD></TR></TBODY></TABLE></P></TD></TR></TBODY></TABLE>
+<TABLE cellSpacing=0 cellPadding=0 width=495 border=0>
+  <TBODY>
+  <TR>
+    <TD vAlign=top><BR>
+      <P>When I first started playing with Macromedia Director I found it an 
+      amazing tool for displaying the motion of particles<SUP>2</SUP> which are 
+      governed by mathematical equations, and I created a <A target=_blank 
+      href="http://www.explorescience.com/">web site</A> with many 
+      demonstrations that I regularly use when teaching introductory physics in 
+      the classroom. As other Director users have stumbled on to the site, the 
+      most common question I get is as follows: 
+      <P><I>
+      <BLOCKQUOTE>How do you control the motion of the golf ball? I have very 
+        little math background, and don't know much about 
+physics.</BLOCKQUOTE></I>
+      <P>If you had taken physics with me you might have learned the answer to 
+      the questions, but luckily we have the web, so I'll give you a quick 
+      introduction to the math, physics, and Lingo necessary to simulate the 
+      real world motion of a football tossed through the air, a feather being 
+      dropped, or a golf ball being launched from the tee. I'd like to point out 
+      that there is no way I could summarize a full semester of physics in this 
+      short article (I can hear some of you breathing a sigh of relief now), and 
+      I will focus on a non-calculus version of physics, and use the simplest 
+      approximation possible to simulate real world motion. 
+      <H4><FONT face="Arial, Helvetica, sans-serif" color=#cc0000>Where fore art 
+      thou?</FONT></H4>
+      <P>One of the first things that people do when learning to control motion 
+      with Director is to use Lingo to move the particle a fixed number of 
+      pixels with every exitFrame. A typical example of this would be <PRE><FONT color=#cc0000>on exitFrame
+  set the locH of sprite 1 = 5 + the locH of sprite 1
+end</FONT></PRE>
+      <P>This code would move the sprite 5 pixels to the right on every 
+      exitFrame. The particle would never move up or down, just to the right. If 
+      we wanted to move the particle up or down we would have used locV rather 
+      than locH. This small piece of code has already introduced us to two of 
+      the three terms that you we'll need to know about - position and velocity. 
+      In Director, the position of a particle is called the location (or loc). 
+      If we have a sprite on the stage you could type into the message window 
+      and get this response <PRE><FONT color=#cc0000>put the loc of sprite 1
+-- point(35,85)
+put the locH of sprite 1
+-- 35
+put the locV of sprite 1
+-- 85</FONT></PRE>
+      <P>The sprites have a horizontal and vertical position. In physics we 
+      prefer to have a well-defined coordinate system (not just horizontal and 
+      vertical), and it is common to call the horizontal axis the x-axis, and 
+      the vertical axis the y-axis, so to describe the position of a particle I 
+      would refer to point(x,y). It should be mentioned that the position is 
+      always relative to an origin. In math the origin generally has a zero for 
+      its x and y values, and in Director the origin is the upper left corner of 
+      the stage - point(0,0). 
+      <H4><FONT face="Arial, Helvetica, sans-serif" color=#cc0000>Warp 
+      Speed.</FONT></H4>
+      <P>In the earlier code we moved our particle 5 pixels to the right every 
+      exitFrame. Average velocity is defined as the change in position divided 
+      by the change in time. In this case our velocity would be 
+      <P><IMG height=30 alt="" src="UD77_files/UD77_Eq1.gif" width=227 border=0> 
+
+      <P>(although the units would certainly confuse most physics teachers). 
+      When we discussed the position of the particle we used the x and the y 
+      locations, and the same must be done for the velocity. Since our particle 
+      was moving horizontally at 5 pixels/exitFrame, this would correspond to Vx 
+      (the component of velocity in the x direction). For this particle Vy = 0 
+      (since it was not moving up or down). Using our definition of velocity we 
+      can now say: 
+      <P><IMG height=30 alt="" src="UD77_files/UD77_Eq2.gif" width=260 border=0> 
+
+      <P>where the little triangular symbol is the greek letter delta. It is 
+      used to represent "change in," so <IMG height=9 alt="" hspace=0 
+      src="UD77_files/UD77_deltasym.gif" width=7 border=0>y means change in y, 
+      and <IMG height=9 alt="" hspace=0 src="UD77_files/UD77_deltasym.gif" 
+      width=7 border=0>t means change in time. (Are those physics memories 
+      creeping back in yet...numbered equations, boring formulae, etc.) 
+      <H4><FONT face="Arial, Helvetica, sans-serif" color=#cc0000>Step on it! 
+      </FONT></H4>
+      <P>Position and velocity have now been introduced, and in a classroom 
+      those concepts are generally understood rather well, but confusion can 
+      often set in when acceleration is introduced. Average acceleration is 
+      defined as the change in velocity divided by the change in time, and just 
+      as we did with the position and velocity, we must deal with the x and y 
+      acceleration individually. In mathematical terms we could write 
+      <P><IMG height=29 alt="" src="UD77_files/UD77_Eq3.gif" width=271 border=0> 
+
+      <P>where once again the little symbols represent the "change in," and in 
+      this case we are looking at the change in velocity in the x direction and 
+      the y direction. 
+      <H4><FONT face="Arial, Helvetica, sans-serif" color=#cc0000>I do not think 
+      you realize the gravity of your situation. - Spock</FONT></H4>
+      <P>Lets now talk about this in terms of throwing a ball straight into the 
+      air. You initially throw the ball up and it has a certain velocity 
+      <B>upward</B>. Take a moment to visualize the motion in your mind. Did the 
+      ball change direction? Did the ball change its velocity during the flight? 
+      Was the ball ever motionless? The answer to all three is yes. Gravity is 
+      what causes the ball to return to the ground because it causes things to 
+      accelerate towards the surface of the Earth. Gravity only acts in one 
+      direction (the vertical direction, the y-axis, etc.) and can be considered 
+      a constant value. If we rearrange the y-component of Equations 2 and 3 we 
+      can say 
+      <P><IMG height=38 alt="" src="UD77_files/UD77_Eq4.gif" width=230 border=0> 
+
+      <P>where <IMG height=9 alt="" hspace=0 src="UD77_files/UD77_deltasym.gif" 
+      width=7 border=0>Vy is the amount of change in the y-velocity during the 
+      time <IMG height=9 alt="" hspace=0 src="UD77_files/UD77_deltasym.gif" 
+      width=7 border=0>t. When speaking we would say the ball is initially 
+      moving up, but when you catch it later, the ball was moving down. In 
+      physics we choose a direction to be positive, and when the ball is moving 
+      that way it has a positive direction, and opposite of that would be a 
+      negative direction. The position, velocity and acceleration must be 
+      defined according to the same schemes. With Direction, the x-value (locH) 
+      increases as you move to the right, so we will call that the positive 
+      direction, but the y-value (locV) increases as you move to down (towards 
+      the bottom part of your screen). 
+      <P>We will define down to be the positive y direction. With those 
+      directions in mind, when I throw a ball up, the initial y-velocity is 
+      negative (we'll say -50 m/s), and Ay is positive (lets say +9.8 m/s/s). 
+      Rather than considering our chunk of time to be an exitFrame, we'll now 
+      choose a value of 0.1 second. Lets say our ball was initially at the 
+      location of point(40,100) on the stage. <EQUATION image>
+      <P>With all those initial conditions, after one tenth of a second I would 
+      find that 
+      <P><IMG height=9 alt="" hspace=0 src="UD77_files/UD77_deltasym.gif" 
+      width=7 border=0>Vy = 9.8 * 0.1 = 0.98 m/s and<BR><IMG height=9 alt="" 
+      hspace=0 src="UD77_files/UD77_deltasym.gif" width=7 border=0>y = -50 * 0.1 
+      = -5 m 
+      <P>The new velocity and position after the small time interval are found 
+      to be 
+      <P>Vy = Vy + <IMG height=9 alt="" hspace=0 
+      src="UD77_files/UD77_deltasym.gif" width=7 border=0>Vy = -50 + 0.98 = 
+      -49.02 m/s and<BR>y = y + <IMG height=9 alt="" hspace=0 
+      src="UD77_files/UD77_deltasym.gif" width=7 border=0>y = 100 + (-5) = 95 m 
+      <P>from which you can see that the ball is now moving more slowly than it 
+      was initially, and it has moved <B>upward</B> on the stage (although the 
+      y-value has decreased). Spend a few moments watching the bouncing ball. 
+      <P>
+      <OBJECT 
+      codeBase=http://active.macromedia.com/director/cabs/sw.cab#version=6,0,1,0 
+      classid=clsid:166B1BCA-3F9C-11CF-8075-444553540000 width=224 height=210><PARAM NAME="SRC" VALUE="../other/UD77_demo1.dcr">
+      <embed src="../other/UD77_demo1.dcr" 
+      pluginspage="http://www.macromedia.com/shockwave/download/" 
+      type="application/x-director" width="224" height="210"></embed> </OBJECT>
+      <P>The approximation I just showed is known as the Euler's 
+      method<SUP>3</SUP>. In the real world, time is a continuous event, and 
+      does not occur in small chunks of <IMG height=9 alt="" hspace=0 
+      src="UD77_files/UD77_deltasym.gif" width=7 border=0>t's. For real motion 
+      we use the equations above in the limit where <IMG height=9 alt="" 
+      hspace=0 src="UD77_files/UD77_deltasym.gif" width=7 border=0>t goes to 
+      zero. Using a value of t = 0.0000000000001 to do calculations is not 
+      reasonable, since the code would plug and chug for a long time before 
+      anything appeared to change on the stage (and round-off errors would 
+      accumulate). On the other hand, assuming a <IMG height=9 alt="" hspace=0 
+      src="UD77_files/UD77_deltasym.gif" width=7 border=0>t of 10 seconds would 
+      not be reasonable if you only expect the ball to be in the air for 2 
+      seconds. Finding a reasonable value to balance calculation speed vs. 
+      accuracy is often a challenge. 
+      <H4><FONT face="Arial, Helvetica, sans-serif" color=#cc0000>Enough 
+      Physics...show me the Lingo!</FONT></H4>
+      <P>We now have a wealth of knowledge related to simulating real world 
+      motion with Euler's method, so let's try to put this in terms of a 
+      behavior. Since we have talked about position, velocity, acceleration, and 
+      small time increments I will define all these to be properties <PRE><FONT color=#cc0000>property spriteNum, x, y, Vx, Vy, Ax, Ay, dTime</FONT></PRE>
+      <P>When the sprite starts up, I want it to know what its position is, so I 
+      add this to the beginSprite handler <PRE><FONT color=#cc0000>on beginSprite me
+  set x = float(the locH of sprite spriteNum)
+  set y = float(the locV of sprite spriteNum)
+end</FONT></PRE>
+      <P>You'll notice that I used the float() command for the x and y values. 
+      When simulating motion, it is often difficult to survive in the world of 
+      integers. The floating point variables will certainly slow the code, but 
+      when trying to simulate actual motion of particle systems it is necessary. 
+      In the behavior, the user selects the initial velocities and 
+      accelerations, so the sprite will have those values associated with it. 
+      <P>For Euler's method (recall Equations 2, 3, and 4) I place the 
+      calculations in the exitFrame handler, and include both x and y 
+      directions: <PRE><FONT color=#cc0000><B>on exitFrame me</B>
+
+  -- the small d represents the "delta" 
+  -- (change) from the equations
+
+
+  -- find the changes in velocity
+  set dVx = Ax * dTime
+  set dVy = Ay * dTime
+
+
+  -- find the changes in position
+  set dx = Vx * dTime
+  set dy = Vy * dTime
+
+
+  -- set the new velocities and position
+  set Vx = Vx + dVx
+  set Vy = Vy + dVy
+  set x = x + dx
+  set y = y + dy
+
+
+  -- and now move the sprite to the 
+  -- calculated x and y position
+  set the loc of sprite spriteNum = point(x,y)
+  
+end</FONT></PRE>
+      <P>The three particles on this demonstration have different initial 
+      conditions. Click on them and notice how the motion differs. 
+      <P>
+      <OBJECT 
+      codeBase=http://active.macromedia.com/director/cabs/sw.cab#version=6,0,1,0 
+      classid=clsid:166B1BCA-3F9C-11CF-8075-444553540000 width=224 height=210><PARAM NAME="SRC" VALUE="../other/UD77_demo2.dcr">
+      <embed src="../other/UD77_demo2.dcr" 
+      pluginspage="http://www.macromedia.com/shockwave/download/" 
+      type="application/x-director" width="224" height="210"></embed> </OBJECT>
+      <H4><FONT face="Arial, Helvetica, sans-serif" color=#cc0000>Don't drag me 
+      down...</FONT></H4>
+      <P>In the previous section we had a constant acceleration - that due to 
+      gravity. The vast majority of introductory physics problems assume gravity 
+      is the only acceleration on the particle, but in the real world we have 
+      this quantity called air which tends to oppose the direction of motion. 
+      Think about what happens when you stick your hand out the window of a car 
+      as it travels down the road. If you are travelling with a velocity of 5 
+      miles per hour (mph) and you stick your hand out the window, you notice a 
+      bit of a tug on your hand caused by the air. That tug you feel is called a 
+      force (which is proportional to acceleration). 
+      <P>When you are moving with a velocity of 70 mph that tug on your hand 
+      becomes much larger. If a particle is in a vacuum (no air), we know that 
+      Ay = g (where g is the acceleration due to gravity: accepted value of 9.8 
+      m/s/s), and Ax = 0, since gravity acts downward. If air is added to the 
+      situation, the added acceleration must be opposite the direction of motion 
+      (in other words, be opposite the direction of the velocity), and is 
+      commonly written as 
+      <P><IMG height=39 alt="" src="UD77_files/UD77_Eq5.gif" width=236 border=0> 
+
+      <P>where c is a constant value that you can choose. The larger the value 
+      of c, the larger the "drag force." The negative sign in front of the cV 
+      terms are due to the fact that the drag force must be opposite the 
+      direction of motion. 
+      <P>To incorporate the drag forces into my Lingo, I decide to add two 
+      properties to my behavior and now have <PRE><FONT color=#cc0000>property spriteNum, x, y, Vx, Vy, Ax, Ay 
+property dTime, gravity, dragC</FONT></PRE>
+      <P>and since the acceleration will change over time (since the velocity 
+      will change), I add the lines to the exitFrame handler to calculate the 
+      new acceleration as time passes: <PRE><FONT color=#cc0000><B>on exitFrame me</B>
+
+   -- the small d represents the "delta" 
+   -- (change) from the equations
+   set Ax = -dragC * Vx
+   set Ay = gravity - dragC * Vy
+   
+   -- find the changes in velocity
+   -- the rest of the code follows from 
+   -- the earlier example...
+   
+ end</FONT></PRE>
+      <P>To easily demonstrate this fact, click start to drop the feather and 
+      the hammer at the same time. The only difference between the two particles 
+      is the drag coefficient (dragC) which depends on many things; including 
+      (but not limited to) the mass and size of the particle, and the density of 
+      air. 
+      <P>
+      <OBJECT 
+      codeBase=http://active.macromedia.com/director/cabs/sw.cab#version=6,0,1,0 
+      classid=clsid:166B1BCA-3F9C-11CF-8075-444553540000 width=224 height=210><PARAM NAME="SRC" VALUE="../other/UD77_demo3.dcr">
+      <embed src="../other/UD77_demo3.dcr" 
+      pluginspage="http://www.macromedia.com/shockwave/download/" 
+      type="application/x-director" width="224" height="210"></embed> </OBJECT>
+      <H4><FONT face="Arial, Helvetica, sans-serif" color=#cc0000>Applications 
+      and Final Thoughts</FONT></H4>
+      <P>This simulation used Euler's method to perform the calculations. There 
+      are other methods which are more precise, but this one is elegant and 
+      simple. This code can be used to describe the motion of a sky diver (the 
+      dragC value could be dynamically changed to simulate the opening of the 
+      parachute), or the projectile motion of a missile (please don't sink my 
+      battleship). In free code (download below) I have added several other 
+      features, such as constraining the motion to a rectangle, and bouncing the 
+      particles from the interior of the rectangle <SUP>4</SUP>. See references 
+      for additional information on that subject. I've also added a property so 
+      that you can start the motion via Lingo, and a "coefficient of elasticity" 
+      parameter which determines the percentage of velocity you lose when you 
+      make contact with a wall. 
+      <P>For additional methods that can be used to more accurately simulate 
+      motion, feel free to search the web for the keywords 'Runge-Kutta' or 
+      'Euler-Richardson' and see what pops up. 
+      <P>Sample movies are available for download in <A 
+      href="http://www.director-online.com/howTo/other/UD77.hqx">Mac</A> or <A 
+      href="http://www.director-online.com/howTo/other/UD77.zip">PC</A> format. 
+      <P><FONT face="Arial, Helvetica, sans-serif"><B>References</B></FONT> 
+      <P><SUP><B>1</B></SUP> The title of a movie made in 1993 starring Bridget 
+      Fonda, Eric Stoltz, Phoebe Cates, and Tim Roth. It is unfortunate that 
+      when you study physics your first thought is of Newton's laws when you 
+      hear the title. 
+      <P><SUP><B>2</B></SUP> In physics we like to treat everything as a small 
+      spherical object, or particle. Consider a particle to be anything that you 
+      want moving on your stage; a cow, a UFO, a hammer, a feather, etc. 
+      <P><SUP><B>3</B></SUP> Information about this method can be found in most 
+      any computational methods book, or introductory physics book that includes 
+      discussion of computational methods. 
+      <P><SUP><B>4</B></SUP> A Multimedia Handyman article on <A target=_top 
+      href="http://www.director-online.com/accessArticle2.cfm?id=13">randomly 
+      bouncing sprites</A> 
+      <P><FONT size=-1>Raman Pfaff is the Physics Department Coordinator at the 
+      University of New Haven in West Haven, CT, and has developed educational 
+      physics multimedia for textbooks, science museums,and his own personal 
+      amusement. In a recent dream sequence he was stuck in an infinite repeat 
+      loop but decided to see a movie instead. He can be reached at <A 
+      href="mailto:pfaff@explorescience.com">pfaff@explorescience.com</A>, 
+      website <A target=_blank 
+      href="http://www.explorescience.com/">http://www.explorescience.com/</A></FONT> 
+      </P></TD></TR></TBODY></TABLE></BODY></HTML>
