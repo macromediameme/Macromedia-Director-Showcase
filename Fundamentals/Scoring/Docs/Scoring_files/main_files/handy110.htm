@@ -1,0 +1,341 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0065)http://www.director-online.com/howTo/handy_articles/handy110.html -->
+<HTML><HEAD><TITLE>Multimedia Handyman Number 110</TITLE>
+<META content="pixelgeek design &amp; communications" name=Author>
+<META http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+<META content="MSHTML 5.50.3825.1300" name=GENERATOR></HEAD>
+<BODY vLink=#770000 aLink=#ff0000 link=#ff0000 bgColor=#ffffff>
+<TABLE cellSpacing=0 cellPadding=0 width=495 border=0>
+  <TBODY>
+  <TR>
+    <TD vAlign=top><IMG height=31 src="handy110_files/handyman.gif" width=213 
+      border=0> 
+      <TABLE cellSpacing=0 cellPadding=0 width=495 border=0>
+        <TBODY>
+        <TR>
+          <TD vAlign=top width=440><IMG height=9 
+            src="handy110_files/archiveDivLine.gif" width=440 align=bottom 
+            border=0></TD>
+          <TD vAlign=top width=55 rowSpan=2><A 
+            href="http://www.director-online.com/archive.cfm?pSection=Multimedia%20Handyman"><IMG 
+            height=28 src="handy110_files/archiveDiv.gif" width=55 align=bottom 
+            border=0></A></TD></TR>
+        <TR>
+          <TD vAlign=top width=440>
+            <P><B><FONT face="Arial, Helvetica, sans-serif" color=#cc0000>Dear 
+            Multimedia Handyman</FONT></B> 
+</P></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>
+<TABLE cellSpacing=0 cellPadding=0 width=495 border=0>
+  <TBODY>
+  <TR>
+    <TD><BR>
+      <P>I am going to program an online game by using Director 7. The problem 
+      that I'm facing right now is the database that will store the players' 
+      names and scores. I do not know what kind of database to be created. Can 
+      you give me an idea what kind of database to be used? If the database has 
+      been created, then how to send/add values/ characters that are typed in a 
+      field into the database when a button is clicked? 
+      <P>How to display the top 10 records from the database? Is it display it 
+      in a field too? If so, how to choose from the ten best players(with the 
+      highest scores) from the list of records in the database? 
+      <P><A href="mailto:jeisum@cnl.com.my">jeisum</A> 
+      <P>Dear jeisum, 
+      <P>That's a lot of questions, and unfortunately, the answer is... it all 
+      depends. It depends on what you want to do and how you want to set it up. 
+      It depends on the server technology that you have available to you. And it 
+      depends on the game design and how many people will be playing the game at 
+      once. So, let's look at some options. 
+      <P>The first issue is whether the highscore system is networked, or rather 
+      just on the user's machine. We'll examine the networked option first. 
+      Let's say that your game is on a website in Malaysia. A guy named "John" 
+      in Chicago goes to your page where the Shockwave game downloads to John's 
+      computer and he plays your game. Remember that the game is actually 
+      running on John's computer, <B>not from your server</B>. Meanwhile, 
+      Francois in Paris also goes to your page, downloads and plays your game. 
+      At the end of John's game, his score is sent in a message back to your 
+      server. Your server sends back a list of the top 10 scores, so the 
+      Shockwave game still running on John's computer receives this list and 
+      displays the scores. It shows him that his score is the third highest, 
+      while Francois in Paris holds the top 2 spots. 
+      <P>This is an example where the highscore pits the player against everyone 
+      else in the world. Note that in this example, John and Francois are not 
+      actually playing the game against each other interactively. Rather, they 
+      each play a solitary game on their own computers and the scores are 
+      matched at the end. This is "asynchronous", meaning that John and Francois 
+      aren't necessarily playing at the same time. (Using the Multiuser Server, 
+      you could have many people playing the same networked game at the same 
+      time.) 
+      <P>To make such a highscore system, you'll need something on the server 
+      end to receive a message from the Shockwave game running on the user's 
+      computer. So what is that "something"? Typically, that would be referred 
+      to as a "cgi script". (CGI stands for "common gateway interface", but I 
+      really don't have any insight on what it means.) Think of a cgi as some 
+      kind of a processor on the server end. It receives the message from the 
+      internet, knows how to process it, perhaps saves the results in a text 
+      file or database, then returns a message to the sender. If this seems 
+      vague, it's simply because cgi can refer to a lot of different backend 
+      processors. For example, a cgi script can be a standalone computer program 
+      written in Perl (the most common language for CGI scripts, though there 
+      are other possible languages as well.) The webserver would need to be able 
+      to run Perl scripts. 
+      <P>Another likely alternative would be a database (Filemaker Pro, MS 
+      Access, or a generic datafile) which is accessed using Active Server Pages 
+      or Cold Fusion or any of the other web application development 
+      environments. Since each of these environments has its own protocol for 
+      interacting with the data, I can't be very specific about explaining how 
+      to send and receive the data. Basically, you'll use Director's postNetText 
+      command, calling a specific cgi URL on your server and supplying the 
+      score. (That URL is likely to end in .cgi, .asp, .jsp, .cfm, or something 
+      that indicates special processing.) It will take the score, insert it into 
+      it's appropriate spot in the highscore list and return the 10 top scores. 
+      (I strongly recommend you read Zac's article, <A target=_blank 
+      href="http://www.director-online.com/accessArticle2.cfm?id=317">Integrating 
+      with Cold Fusion</A>. Even if you don't use Cold Fusion, the concepts are 
+      the same.) 
+      <P>Another possible "cgi backend" is a Director projector, using the 
+      multiuser server or multiuser xtra. This option will require the users to 
+      download the multiuser xtra, but that can be coded into the movie so that 
+      it happens automatically. If you go with the option, the Director 
+      projector will run on your server all the time. Everytime a user loads up 
+      your game, it will open a connection to the projector. The projector will 
+      keep track of the scores and take care of all the incoming and outgoing 
+      messages. If you choose this option, you'll need to master the multiuser 
+      server/xtra. We'll be featuring some articles on that in the near future. 
+      In the meantime, check Macromedia's site for documentation. 
+      <P>Whatever cgi backend you choose, you'll need to decide what you're 
+      really going to do with the data. Specifically, how many scores do you 
+      really want to store? If the Shockwave game only displays the top 10, is 
+      there any reason to save more than that? If not, it will be a very simple 
+      database -- storing ten records with fields for score, date and name. On 
+      the other hand, you might want to store data on all the games ever 
+      completed. In this case, the database would be much larger, and only a 
+      select portion of the data would be reported back the the user. 
+      <P>This whole approach is fairly elaborate and will require a significant 
+      learning curve. Let's examine another option which may suit your needs: a 
+      highscore system which is restricted to the user's machine. There is a 
+      developer named Bongwook Lee who has created some <A target=_blank 
+      href="http://www.bongwook.com/portfolio.php3">wonderful Shockwave 
+      games</A>. He provides a fairly simple highscore approach which I have 
+      found quite satisfying as I've grown addicted to his <A target=_blank 
+      href="http://www.bongwook.com/pt/sw/simulis/">Simulus</A> game. The simple 
+      approach is that the highscores are the scores of users on a single 
+      computer. So as I play game after game, I'm competing against myself -- 
+      and my wife who also plays the game on my computer. Let's create this type 
+      of system. 
+      <P>Here's a demo where you can experiment with the features we'll be 
+      including. 
+      <P>
+      <OBJECT 
+      codeBase=http://active.macromedia.com/director/cabs/sw.cab#version=6,0,1,0 
+      classid=clsid:166B1BCA-3F9C-11CF-8075-444553540000 width=320 height=256><PARAM NAME="SRC" VALUE="../other/handy110.dcr"><PARAM NAME="swRemote" VALUE="swTarget='false'"><PARAM NAME="swLiveConnect" VALUE="FALSE">
+      <embed src="../other/handy110.dcr"
+      pluginspage="http://www.macromedia.com/shockwave/download/" 
+      type="application/x-director" width="320" height="256" 
+      swLiveConnect="FALSE"  swRemote="swTarget='false'"></embed> </OBJECT>
+      <P>A sample movie is available for download in <A 
+      href="http://www.director-online.com/howTo/other/handy110.hqx">Mac</A> or 
+      <A href="http://www.director-online.com/howTo/other/handy110.zip">PC</A> 
+      format. This is a D7 movie. 
+      <P>Lists will adequately store the data we need to keep, and my first 
+      inclination was to go for a property list. But the design of this list is 
+      a little bit complicated. Let's think about what we want the list to be 
+      able to do. For any particular score, we'll want to store the points, the 
+      user's name, and the date. We'll need to be able to order the scores (with 
+      names and dates) from highest points to lowest points. So if we had a 
+      property list that was indexed by the points, we could just sort that 
+      list. The problem is that it's possible that you'll have more than one 
+      game with the same point total -- both of which need to be listed. As 
+      well, it's likely that the same person will play more than one game, and 
+      perhaps on the same date. In a property list, you can't have duplicate 
+      properties, so we can't index the property list by the values for points, 
+      names, or dates. 
+      <P>In Tab Julius' book "Lingo - An Advanced Guide", he suggests the use of 
+      parallel lists. So imagine that we have one list which stores all of the 
+      points, another list for the names, and a third list for the dates. So for 
+      any given game score, you'll store the point value in one list, the 
+      player's name in a second list, and the date in a third list. The trick is 
+      that these values are linked together by their position in their 
+      respective list. Take a look at these three lists: 
+      <P><PRE><FONT color=#cc0000>pointList = [90,180,35,75,105,90,150,95,130,125]
+nameList = ["Bob", "Carol","Carol", "Bob", "Alice", ¬
+  "Bob", "Ted", "Ted", "Ted", "Alice"]
+dateList = ["11/17/99", "11/17/99", "11/17/99", ¬
+  "11/19/99", "11/18/99", "11/27/99", "11/23/99", ¬
+  "11/19/99", "11/15/99", "11/27/99"]</FONT></PRE>
+      <P>For example, look at the fifth value in each list. They indicate that 
+      Alice played a game on 11/18/99 and scored 105 points. You can see that 
+      it's critical to maintain parallel order in the lists. So that means we 
+      cannot use the sort function. Doing so would royally screw up the system 
+      by breaking the linkage between points, players' names, and the dates. 
+      This is of importance when we need to list the scores in order of highest 
+      to lowest points. We'll get to that shortly. 
+      <P>We'll use setPref to store the lists in the user's prefs file. For ease 
+      in handling the three lists, I'm going to combine them into a single 
+      property list which I'll store in a global variable called gScores. Then, 
+      I'll save a string version of gScores using setPrefs. 
+      <P><PRE><FONT color=#cc0000>gScores = [:]
+addProp gScores, #points, pointList
+addProp gScores, #names, nameList
+addProp gScores, #dates, dateList
+setPref("myScores", string(gScores))</FONT></PRE>
+      <P>So now, gScores is a property list containing all three lists, and it 
+      looks like this: 
+      <P><PRE><FONT color=#cc0000>put gScores
+-- [#points: [90, 180, 35, 75, 105, 90, 150, 95, 130, 125], ¬
+  #names: ["Bob", "Carol", "Carol", "Bob", "Alice", "Bob", ¬
+  "Ted", "Ted", "Ted", "Alice"], #dates: ["11/17/99", ¬
+  "11/17/99", "11/17/99", "11/19/99", "11/18/99", ¬
+  "11/27/99", "11/23/99", "11/19/99", "11/15/99", ¬
+  "11/27/99"]]</FONT></PRE>
+      <P>When the game initially loads (on startMovie), I'll use getPref to 
+      retrieve the value for gScores from the user's prefs file. That file won't 
+      exist the very first time the user plays, so you have to allow for that 
+      possibility in the script. 
+      <P><PRE><FONT color=#cc0000><B>on startMovie</B>
+
+  global gScores
+  
+  scoreString = getPref("myScores")
+  if voidP(scoreString) then 
+    -- no scores saved yet
+    clearScores
+  else
+    -- convert prefs string to list
+    gScores = value(scoreString)
+  end if
+  
+end startMovie
+
+<B>on clearScores</B>
+
+  global gScores
+  
+  pointList = [0,0,0,0,0,0,0,0,0,0]
+  nameList = ["", "", "", "", "", "", "", "", "", ""]
+  dateList = ["", "", "", "", "", "", "", "", "", ""]
+  gScores = [:]
+  addProp gScores, #points, pointList
+  addProp gScores, #names, nameList
+  addProp gScores, #dates, dateList  
+  setPref("myScores", string(gScores))
+  
+end clearScores</FONT></PRE>
+      <P>This initializes the global variable gScores, using the value stored in 
+      the prefs file -- if there was already a value there. If the game has 
+      never been played on that computer, then there won't be a value in the 
+      prefs file (void), so the clearScores handler sets the initial values for 
+      zero and writes that to the prefs file. 
+      <P>We'll need a behavior to apply to the text sprite so that the values in 
+      gScores can be displayed on the stage. I set up a text member, picking the 
+      color and font and setting the tabs for the display I want. Then, apply 
+      this behavior: 
+      <P><PRE><FONT color=#cc0000>global gScores
+
+on beginSprite me
+	displayScores me
+end beginSprite
+
+<B>on displayScores me</B>
+
+  -- separate the 3 lists from gScores
+  pointList = gScores.points
+  nameList = gScores.names
+  dateList = gScores.dates
+  
+  -- create rankOrder list
+  rankOrder = []
+  pointListCopy = duplicate(pointList)
+  repeat with i = 1 to 10
+    topPosition = getPos(pointListCopy, ¬
+      max(pointListCopy))
+    add rankOrder, topPosition
+    pointListCopy[topPosition] = -1
+  end repeat
+  
+  -- build the text string
+  displayText = ""
+  rank = 0
+  
+  repeat with whichPos in rankOrder
+    rank = rank + 1
+    thisPoints = pointList[whichPos]
+    thisName = nameList[whichPos]
+    thisDate = dateList[whichPos]
+    thisLine = TAB &amp; rank &amp; ":" &amp; TAB &amp; thisPoints &amp; ¬
+      TAB &amp; thisName &amp; TAB &amp; thisDate 
+    displayText = displayText &amp; thisLine &amp; RETURN
+  end repeat
+  
+  sprite(me.spriteNum).member.text = displayText
+  
+end displayScores</FONT></PRE>
+      <P>The displayScores handler is where we have to deal with pulling 
+      corresponding values from each of the three lists. I start the handler by 
+      separating out the three lists from the whole gScores list. Now I 
+      explained earlier that we can't sort the scores list without screwing up 
+      our parallel lists. So we need another way to get the order of the lists 
+      from highscore to low. Take a look at this example: 
+      <P><PRE><FONT color=#cc0000>put gScores.points
+-- [90, 180, 35, 75, 105, 90, 150, 95, 130, 125]</FONT></PRE>
+      <P>This is the pointList from gScores. You can see that they aren't in 
+      sorted order, but remember that we don't want to change the order because 
+      it corresponds to the other lists. So let's create another list called 
+      rankOrder. The rankOrder list will tell us the position in the pointList 
+      of the highest to lowest scores. So for the example above... 
+      <P><PRE><FONT color=#cc0000>rankOrder = [2, 7, 9, 10, 5, 8, 1, 6, 4, 3]</FONT></PRE>
+      <P>You see that the first value in rankOrder is 2 because the highest 
+      score in our pointList above is the second value -- which happens to be 
+      180 (irrelevant). The next highest score is the 7th value, followed by the 
+      9th, 10th, 5th, 8th, 1st, 6th, 4th... and the 3rd value in the pointList 
+      is the lowest. Note that since the 1st and 6th scores are the same, it 
+      really doesn't matter which of the two goes first. 
+      <P>So that's the concept. Setting rankOrder from the pointList is a little 
+      tricky, as you can see in the code of the displayScores handler. But once 
+      we have the rankOrder list, it's a breeze to parse the corresponding 
+      values from our three data lists. By the way, my variable "rank" has to do 
+      with the 1 to 10 that appears on the left side of the stage display. Don't 
+      confuse it with rankOrder. 
+      <P>All that's left is to enter a player's new score into the list. This 
+      won't happen every game, only when the currentScore is greater than the 
+      lowest of the 10 high scores. When that happens, that lowest score will 
+      get replaced by the new score -- along with the player's name and the 
+      current date. Note that the new score probably won't be the lowest, so 
+      when a new score goes in, the rankOrder will change. 
+      <P>Here's the movie script needed to set a score. When you call this 
+      handler (when the game is over) you'll need to supply the value for the 
+      currentScore. This handler starts by checking to see if the currentScore 
+      is greater than or equal to the minimum value in the pointList. If so, the 
+      variable "bumpedPos" is set to the position (not value) of the lowest 
+      score in the pointsList. Then the new data is inserted into each of the 
+      three lists using the bumpedPos variable to keep them linked to each 
+      other. 
+      <P><PRE><FONT color=#cc0000><B>on setScore currentScore</B>
+
+  global gScores
+  
+  pointList = gScores.points
+  lowestHighScore = min(pointList)
+  
+  if currentScore &gt;= lowestHighScore then
+    bumpedPos = getPos(pointList, min(pointList))
+    gScores.points[bumpedPos] = currentScore
+    gScores.names[bumpedPos] = member("name").text
+    gScores.dates[bumpedPos] = the short date
+    setPref("myScores", string(gScores))
+  end if
+  
+end setScore</FONT></PRE>
+      <P>Now that you know how it all works, play with the demo movie above. 
+      Enter a score which is lower than the lowest value there. Notice that the 
+      value is not added to the list. Add a score that is equal to one of the 
+      other values. If it's the lowest value, then the newer score replaces the 
+      older one. 
+      <P>This system is not the answer for a networked online game, but it's a 
+      pretty good solution for individual competition or a kiosk game situation. 
+      Good luck with your program! 
+      <P><FONT size=-1>Send your questions to the <A 
+      href="mailto:handyman@director-online.com">Handyman</A>. Questions will be 
+      selected on the basis of general applicability. For prompt replies to 
+      specific questions, post your inquiries in the <A target=display 
+      href="http://www.director-online.com/help_central/Display.html">Help 
+      Central</A> section of DOUG.</FONT> </P></TD></TR></TBODY></TABLE></BODY></HTML>
