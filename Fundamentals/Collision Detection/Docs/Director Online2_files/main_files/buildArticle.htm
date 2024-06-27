@@ -1,0 +1,275 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0054)http://www.director-online.com/buildArticle.cfm?id=852 -->
+<HTML><HEAD><TITLE>A Director Online article</TITLE>
+<META content="pixelgeek design &amp; communications" name=Author>
+<META http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+<SCRIPT language=JavaScript>
+    <!--
+    function MM_openBrWindow(theURL,winName,features) { //v1.2
+      window.open(theURL,winName,features);
+    }
+    //-->
+</SCRIPT>
+
+<META content="MSHTML 5.50.4030.2400" name=GENERATOR></HEAD>
+<BODY text=#000000 vLink=#31427b aLink=#425294 link=#425294 bgColor=#ffffff>
+<P><BR>
+<TABLE height=25 cellSpacing=0 cellPadding=0 width=500 border=0>
+  <TBODY>
+  <TR vAlign=top align=left bgColor=#cecece>
+    <TD><A 
+      onmouseover="window.status='Get the direct URL for this article'; return true" 
+      onclick="MM_openBrWindow('generateURL.cfm?id=852','utility','scrollbars=yes,resizable=no,width=400,height=250'); return false" 
+      href="http://www.director-online.com/generateURL.cfm?id=852"><IMG 
+      height=25 alt="Get the direct URL for this article" 
+      src="buildArticle_files/articleURL.gif" width=87 border=0></A> </TD>
+    <TD><A 
+      onmouseover="window.status='Visit the Lingo Lounge article archive'; return true" 
+      href="http://www.director-online.com/archive.cfm?pSection=Lingo%20Lounge"><IMG 
+      height=25 alt="Visit the Lingo Lounge article archive" 
+      src="buildArticle_files/archives.gif" width=66 border=0></A> </TD>
+    <TD><A 
+      onmouseover="window.status='Check out other articles by Gary Rosenzweig'; return true" 
+      href="http://www.director-online.com/buildAuthorsArticles.cfm?author=50"><IMG 
+      height=25 alt="Check out other articles by Gary Rosenzweig" 
+      src="buildArticle_files/author.gif" width=56 border=0></A> </TD>
+    <TD><A 
+      onmouseover="window.status='Mail this article to a friend'; return true" 
+      onclick="MM_openBrWindow('emailArticle.cfm?id=852','utility','scrollbars=yes,resizable=no,width=400,height=400'); return false" 
+      href="http://www.director-online.com/emailArticle.cfm?id=852"><IMG 
+      height=25 alt="Mail this article to a friend" 
+      src="buildArticle_files/mailArticle.gif" width=83 border=0></A> </TD>
+    <TD><A 
+      onmouseover="window.status='Sign in to your myDOUG page'; return true" 
+      onclick="MM_openBrWindow('myDOUG/login.cfm?type=toolbar','utility','scrollbars=yes,resizable=no,width=525,height=400'); return false" 
+      href="http://www.director-online.com/myDOUG/login.cfm?type=toolbar"><IMG 
+      height=25 alt="Sign in to your myDOUG page" 
+      src="buildArticle_files/signIn.gif" width=63 border=0></A> </TD>
+    <TD><A 
+      onmouseover="window.status='Discuss this article on DOUGthreads'; return true" 
+      href="http://209.112.84.34/Forums/index.cfm?cfapp=2&amp;Thread_ID=2492"><IMG 
+      height=25 alt="Discuss this article on DOUGthreads" 
+      src="buildArticle_files/discussArticle.gif" width=105 border=0></A> </TD>
+    <TD><A 
+      onmouseover="window.status='What do these buttons do?'; return true" 
+      onclick="MM_openBrWindow('help.html','utility','scrollbars=yes,resizable=no,width=400,height=250'); return false" 
+      href="http://www.director-online.com/help.html"><IMG height=25 
+      alt="What do these buttons do?" src="buildArticle_files/help.gif" width=25 
+      border=0></A> </TD></TR></TBODY></TABLE>
+<P><FONT face="Verdana, Arial, Geneva, Helvetica, sans-serif" size=+2><B>Lingo 
+Lounge</B></FONT><BR><FONT face="Verdana, Arial, Geneva, Helvetica, sans-serif" 
+color=#cc0000 size=+1><B>Lingo Collision Detection, Part 2</B></FONT> 
+<P><FONT size=-1>by <A href="mailto:lingolounge@director-online.com">Gary 
+Rosenzweig</A> </FONT>
+<P>
+<TABLE cellSpacing=0 cellPadding=0 width=500 border=0>
+  <TBODY>
+  <TR>
+    <TD vAlign=top>
+      <P>Last week we looked at some basic Lingo for collision detection: 
+      intersects, intersect, inside and hitTest. We also looked at mathematical 
+      ways to detect collisions. All of these methods fall short in one way or 
+      another. Most will not detect collisions around shapes more complex than a 
+      rectangle. Others will not detect collisions until the Stage has already 
+      been updated to show the objects overlapping. 
+      <P>Before looking at ways to improve collision detection, it is important 
+      to understand how objects move in computer programs. In real life, if you 
+      walk from one side of the room to the other, you pass through an infinite 
+      amount of points. At any moment you could stop, and at any moment another 
+      person could see you at a location. Time can be divided into smaller and 
+      smaller pieces to more accurately define your position at a given moment. 
+      <P>With computer animation, the movement happens in slices of time called 
+      frames. You can have 15 frames per second, 60 frames per second, or even 
+      up to 999 frames per second with Director 8. However, you cannot have an 
+      infinite number of frames per second. So an object on the screen must jump 
+      from one defined instant of time to the next, and never be somewhere in 
+      between. 
+      <P>There are two ways than an object can move. The first is instantaneous 
+      movement. This is when the object can suddenly jump from one point on the 
+      screen to another. This is what happens when a mouse is used to control an 
+      object. The user can simply flick his or her wrist to zap the object 
+      across the screen. 
+      <P>The other way that an object can move is incrementally. This is when 
+      the object can only move step-by-step. It is typical of arrow key 
+      movement. 
+      <P>Most video games require that the objects move incrementally. Think 
+      about it. If a bomb is raining down in Space Invaders, and the player's 
+      ship is to the right on the bomb, then the player moves the ship to the 
+      left of side of the screen, the ship cannot be allowed to skip over the 
+      bomb. It must impact and destroy the ship. If a mouse is used to control 
+      the ship, and the ship's position is directly linked to the mouse 
+      position, then the ship can simply jump from one side of the screen to 
+      another in an instant, avoiding objects that should be in the path. 
+      <P>Doing collision detection with instantaneous movement is very 
+      difficult. Every time the object changes position, you would have to look 
+      at the line between the old location and the new location and see if there 
+      was a collision. If so, you will have to take the object back to the point 
+      of collision. When irregular shapes are concerned, this will be nearly 
+      impossible to do with Lingo's primitive collision detection functions. 
+      <P>Incremental movement is much easier to deal with. If an object collides 
+      with another, you can simply take it one step back to avoid the collision. 
+      You would want to do this in the case of a wall or something that the 
+      player is not supposed to be able to get through. 
+      <P>So let's look at the example of a player character and a wall. The wall 
+      is an impenetrable object that the character cannot move through. The wall 
+      is perfectly rectangular. If you want to have a move complex shape, have 
+      many wall sprites instead of just one. 
+      <P>The following movie shows a character that can be moved around with the 
+      arrow keys. As each move is made, the program checks to make sure that no 
+      walls are hit. If a wall is to be hit, then the movement is not allowed. 
+      <P>
+      <OBJECT 
+      codeBase=http://active.macromedia.com/director/cabs/sw.cab#version=6,0,1,0 
+      classid=clsid:166B1BCA-3F9C-11CF-8075-444553540000 width=200 height=150><PARAM NAME="SRC" VALUE="howTo/other/LL012.dcr"><PARAM NAME="swRemote" VALUE="swTarget='false'"><PARAM NAME="swLiveConnect" VALUE="FALSE">
+      <embed src="howTo/other/LL012.dcr"
+      pluginspage="http://www.macromedia.com/shockwave/download/" 
+      type="application/x-director" width="200" height="150" 
+      swLiveConnect="FALSE"  swRemote="swTarget='false'"></embed> </OBJECT>
+      <P>Use the arrow keys to move the character around.<BR>Director 8 download 
+      for <A href="http://www.director-online.com/howTo/other/LL012.hqx">Mac</A> 
+      or <A 
+      href="http://www.director-online.com/howTo/other/LL012.zip">Windows</A>. 
+      <P>The intersect command is used to determine if there is a collision. It 
+      is used before the actual movement takes place. The way this is done is 
+      that the program calculates from the current rect of the sprite and the 
+      direction of movement what the new rect will be. It then compares that to 
+      the rect of the wall. If they intersect, then the movement is not allowed. 
+
+      <P>This idea of checking for collisions before the movement takes place is 
+      rarely used by Lingo programmers, but it should be used almost all the 
+      time. Here is the code that makes it work. First, there is the "on move" 
+      handler in the character sprite. This will work out the new rect of the 
+      sprite and check with all the possible wall sprites to see if there is a 
+      collision. 
+      <P><FONT face="Verdana, Arial, Helvetica, sans-serif" color=#000000 
+      size=-1><B><FONT color=#0000c8>on</FONT> <FONT color=#008000>move</FONT> 
+      <FONT color=#0000c8>me</FONT></B>, dx, 
+      dy<BR>&nbsp;&nbsp;<BR>&nbsp;&nbsp;<FONT face="Courier New, Courier, mono" 
+      color=#c80000 size=-1>-- get rect and add change to 
+      it</FONT><BR>&nbsp;&nbsp;oldRect = <FONT color=#008000>sprite</FONT>(<FONT 
+      color=#0000c8>me</FONT>.<FONT color=#008000>spriteNum</FONT>).<FONT 
+      color=#008000>rect</FONT><BR>&nbsp;&nbsp;newRect = oldRect + <FONT 
+      color=#008000>rect</FONT>(dx,dy,dx,dy)<BR>&nbsp;&nbsp;<BR>&nbsp;&nbsp;<FONT 
+      face="Courier New, Courier, mono" color=#c80000 size=-1>-- loop through 
+      possible wall sprites </FONT><BR>&nbsp;&nbsp;<FONT 
+      face="Courier New, Courier, mono" color=#c80000 size=-1>-- and detect 
+      collisions</FONT><BR>&nbsp;&nbsp;hitWall = <FONT 
+      color=#0000c8>FALSE</FONT><BR>&nbsp;&nbsp;<FONT 
+      color=#0000c8>repeat</FONT> <FONT color=#0000c8>with</FONT> i = <FONT 
+      color=#808080>2</FONT> <FONT color=#0000c8>to</FONT> <FONT 
+      color=#808080>10</FONT><BR>&nbsp;&nbsp;&nbsp;&nbsp;<FONT 
+      color=#0000c8>if</FONT> <FONT color=#008000>sendSprite</FONT>(i,<FONT 
+      color=#008000>#</FONT>hitWall,newRect) <FONT 
+      color=#0000c8>then</FONT><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hitWall = 
+      <FONT 
+      color=#0000c8>TRUE</FONT><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT 
+      color=#008000>exit</FONT> <FONT 
+      color=#0000c8>repeat</FONT><BR>&nbsp;&nbsp;&nbsp;&nbsp;<FONT 
+      color=#0000c8>end</FONT> <FONT 
+      color=#0000c8>if</FONT><BR>&nbsp;&nbsp;<FONT color=#0000c8>end</FONT> 
+      <FONT color=#0000c8>repeat</FONT><BR>&nbsp;&nbsp;<BR>&nbsp;&nbsp;<FONT 
+      face="Courier New, Courier, mono" color=#c80000 size=-1>-- if no 
+      collision, then move sprite</FONT><BR>&nbsp;&nbsp;<FONT 
+      color=#0000c8>if</FONT> not hitWall <FONT 
+      color=#0000c8>then</FONT><BR>&nbsp;&nbsp;&nbsp;&nbsp;<FONT 
+      color=#008000>sprite</FONT>(<FONT color=#0000c8>me</FONT>.<FONT 
+      color=#008000>spriteNum</FONT>).<FONT color=#008000>loc</FONT> = <FONT 
+      color=#008000>sprite</FONT>(<FONT color=#0000c8>me</FONT>.<FONT 
+      color=#008000>spriteNum</FONT>).<FONT color=#008000>loc</FONT> + <FONT 
+      color=#008000>point</FONT>(dx,dy)<BR>&nbsp;&nbsp;<FONT 
+      color=#0000c8>end</FONT> <FONT 
+      color=#0000c8>if</FONT><BR>&nbsp;&nbsp;<BR><FONT 
+      color=#0000c8>end</FONT><BR></FONT></P>
+      <P>In each wall sprite, in this case sprite 2 through 10, the "on hitWall" 
+      handler will return a TRUE only if the rect of the wall and the rect of 
+      the object intersect. 
+      <P><FONT face="Verdana, Arial, Helvetica, sans-serif" color=#000000 
+      size=-1><B><FONT color=#0000c8>on</FONT> hitWall <FONT 
+      color=#0000c8>me</FONT></B>, objRect<BR>&nbsp;&nbsp;<BR>&nbsp;&nbsp;<FONT 
+      color=#0000c8>if</FONT> <FONT color=#008000>intersect</FONT>(<FONT 
+      color=#008000>sprite</FONT>(<FONT color=#0000c8>me</FONT>.<FONT 
+      color=#008000>spriteNum</FONT>).<FONT color=#008000>rect</FONT>,objRect) 
+      &lt;&gt; <FONT color=#008000>rect</FONT>(<FONT 
+      color=#808080>0</FONT>,<FONT color=#808080>0</FONT>,<FONT 
+      color=#808080>0</FONT>,<FONT color=#808080>0</FONT>) <FONT 
+      color=#0000c8>then</FONT><BR>&nbsp;&nbsp;&nbsp;&nbsp;<FONT 
+      color=#0000c8>return</FONT> <FONT 
+      color=#0000c8>TRUE</FONT><BR>&nbsp;&nbsp;<FONT 
+      color=#0000c8>else</FONT><BR>&nbsp;&nbsp;&nbsp;&nbsp;<FONT 
+      color=#0000c8>return</FONT> <FONT 
+      color=#0000c8>FALSE</FONT><BR>&nbsp;&nbsp;<FONT color=#0000c8>end</FONT> 
+      <FONT color=#0000c8>if</FONT><BR>&nbsp;&nbsp;<BR><FONT 
+      color=#0000c8>end</FONT><BR></FONT></P>
+      <P>We could have done this intersect test inside the "on move" handler. 
+      However, this would assume that every sprite was in use and being used as 
+      a wall. This way, you can stick other objects in sprites and they will 
+      only respond with a possible TRUE if it is has the behavior attached to it 
+      with the "on hitWall" handler. If no sprite is there at all, or one 
+      without an "on hitWall" handler, then a VOID is returned. This is then 
+      interpreted as a FALSE by the "on move" handler. 
+      <P>If you want to study this type of collision detection more, I use it in 
+      the adventure game chapter of my "Advanced Lingo for Games" book. Next 
+      week, we'll take a closer look at how to actually detect when a collision 
+      has occurred. Director 8's new Imaging Lingo offers us some new tools 
+      there. 
+      <P>Gary Rosenzweig's latest book is "Advanced Lingo for Games." In it, you 
+      can find the source code for more than 20 complete games. More information 
+      about the book can be found at <A target=_blank 
+      href="http://clevermedia.com/resources/bookstore/book4.html">http://clevermedia.com/resources/bookstore/book4.html</A>. 
+      It can be purchased there, or in your local bookstore. 
+</P></TD></TR></TBODY></TABLE>
+<P>
+<TABLE width=500>
+  <TBODY>
+  <TR>
+    <TD><FONT size=-1>Gary Rosenzweig is the Chief Engineer, founder, and 
+      owner of CleverMedia, a game and multimedia development company in Denver, 
+      Colorado. He has written four books on Macromedia Director and speaks 
+      regularly at Macromedia and Game Developer conferences. CleverMedia's four 
+      sites of games can be found at <A target=_blank 
+      href="http://clevermedia.com/">http://clevermedia.com/</A>. 
+      <P></FONT></P></TD></TR></TBODY></TABLE>
+<P>
+<TABLE height=25 cellSpacing=0 cellPadding=0 width=500 border=0>
+  <TBODY>
+  <TR vAlign=top align=left bgColor=#cecece>
+    <TD><A 
+      onmouseover="window.status='Get the direct URL for this article'; return true" 
+      onclick="MM_openBrWindow('generateURL.cfm?id=852','utility','scrollbars=yes,resizable=no,width=400,height=250'); return false" 
+      href="http://www.director-online.com/generateURL.cfm?id=852"><IMG 
+      height=25 alt="Get the direct URL for this article" 
+      src="buildArticle_files/articleURL.gif" width=87 border=0></A> </TD>
+    <TD><A 
+      onmouseover="window.status='Visit the Lingo Lounge article archive'; return true" 
+      href="http://www.director-online.com/archive.cfm?pSection=Lingo%20Lounge"><IMG 
+      height=25 alt="Visit the Lingo Lounge article archive" 
+      src="buildArticle_files/archives.gif" width=66 border=0></A> </TD>
+    <TD><A 
+      onmouseover="window.status='Check out other articles by Gary Rosenzweig'; return true" 
+      href="http://www.director-online.com/buildAuthorsArticles.cfm?author=50"><IMG 
+      height=25 alt="Check out other articles by Gary Rosenzweig" 
+      src="buildArticle_files/author.gif" width=56 border=0></A> </TD>
+    <TD><A 
+      onmouseover="window.status='Mail this article to a friend'; return true" 
+      onclick="MM_openBrWindow('emailArticle.cfm?id=852','utility','scrollbars=yes,resizable=no,width=400,height=400'); return false" 
+      href="http://www.director-online.com/emailArticle.cfm?id=852"><IMG 
+      height=25 alt="Mail this article to a friend" 
+      src="buildArticle_files/mailArticle.gif" width=83 border=0></A> </TD>
+    <TD><A 
+      onmouseover="window.status='Sign in to your myDOUG page'; return true" 
+      onclick="MM_openBrWindow('myDOUG/login.cfm?type=toolbar','utility','scrollbars=yes,resizable=no,width=525,height=400'); return false" 
+      href="http://www.director-online.com/myDOUG/login.cfm?type=toolbar"><IMG 
+      height=25 alt="Sign in to your myDOUG page" 
+      src="buildArticle_files/signIn.gif" width=63 border=0></A> </TD>
+    <TD><A 
+      onmouseover="window.status='Discuss this article on DOUGthreads'; return true" 
+      href="http://209.112.84.34/Forums/index.cfm?cfapp=2&amp;Thread_ID=2492"><IMG 
+      height=25 alt="Discuss this article on DOUGthreads" 
+      src="buildArticle_files/discussArticle.gif" width=105 border=0></A> </TD>
+    <TD><A 
+      onmouseover="window.status='What do these buttons do?'; return true" 
+      onclick="MM_openBrWindow('help.html','utility','scrollbars=yes,resizable=no,width=400,height=250'); return false" 
+      href="http://www.director-online.com/help.html"><IMG height=25 
+      alt="What do these buttons do?" src="buildArticle_files/help.gif" width=25 
+      border=0></A> </TD></TR></TBODY></TABLE>
+<P> </P></BODY></HTML>

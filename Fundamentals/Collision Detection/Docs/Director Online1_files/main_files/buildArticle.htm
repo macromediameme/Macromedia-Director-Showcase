@@ -1,0 +1,276 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0054)http://www.director-online.com/buildArticle.cfm?id=848 -->
+<HTML><HEAD><TITLE>A Director Online article</TITLE>
+<META content="pixelgeek design &amp; communications" name=Author>
+<META http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+<SCRIPT language=JavaScript>
+    <!--
+    function MM_openBrWindow(theURL,winName,features) { //v1.2
+      window.open(theURL,winName,features);
+    }
+    //-->
+</SCRIPT>
+
+<META content="MSHTML 5.50.4030.2400" name=GENERATOR></HEAD>
+<BODY text=#000000 vLink=#31427b aLink=#425294 link=#425294 bgColor=#ffffff>
+<P><BR>
+<TABLE height=25 cellSpacing=0 cellPadding=0 width=500 border=0>
+  <TBODY>
+  <TR vAlign=top align=left bgColor=#cecece>
+    <TD><A 
+      onmouseover="window.status='Get the direct URL for this article'; return true" 
+      onclick="MM_openBrWindow('generateURL.cfm?id=848','utility','scrollbars=yes,resizable=no,width=400,height=250'); return false" 
+      href="http://www.director-online.com/generateURL.cfm?id=848"><IMG 
+      height=25 alt="Get the direct URL for this article" 
+      src="buildArticle_files/articleURL.gif" width=87 border=0></A> </TD>
+    <TD><A 
+      onmouseover="window.status='Visit the Lingo Lounge article archive'; return true" 
+      href="http://www.director-online.com/archive.cfm?pSection=Lingo%20Lounge"><IMG 
+      height=25 alt="Visit the Lingo Lounge article archive" 
+      src="buildArticle_files/archives.gif" width=66 border=0></A> </TD>
+    <TD><A 
+      onmouseover="window.status='Check out other articles by Gary Rosenzweig'; return true" 
+      href="http://www.director-online.com/buildAuthorsArticles.cfm?author=50"><IMG 
+      height=25 alt="Check out other articles by Gary Rosenzweig" 
+      src="buildArticle_files/author.gif" width=56 border=0></A> </TD>
+    <TD><A 
+      onmouseover="window.status='Mail this article to a friend'; return true" 
+      onclick="MM_openBrWindow('emailArticle.cfm?id=848','utility','scrollbars=yes,resizable=no,width=400,height=400'); return false" 
+      href="http://www.director-online.com/emailArticle.cfm?id=848"><IMG 
+      height=25 alt="Mail this article to a friend" 
+      src="buildArticle_files/mailArticle.gif" width=83 border=0></A> </TD>
+    <TD><A 
+      onmouseover="window.status='Sign in to your myDOUG page'; return true" 
+      onclick="MM_openBrWindow('myDOUG/login.cfm?type=toolbar','utility','scrollbars=yes,resizable=no,width=525,height=400'); return false" 
+      href="http://www.director-online.com/myDOUG/login.cfm?type=toolbar"><IMG 
+      height=25 alt="Sign in to your myDOUG page" 
+      src="buildArticle_files/signIn.gif" width=63 border=0></A> </TD>
+    <TD><A 
+      onmouseover="window.status='Discuss this article on DOUGthreads'; return true" 
+      href="http://209.112.84.34/Forums/index.cfm?cfapp=2&amp;Thread_ID=2491"><IMG 
+      height=25 alt="Discuss this article on DOUGthreads" 
+      src="buildArticle_files/discussArticle.gif" width=105 border=0></A> </TD>
+    <TD><A 
+      onmouseover="window.status='What do these buttons do?'; return true" 
+      onclick="MM_openBrWindow('help.html','utility','scrollbars=yes,resizable=no,width=400,height=250'); return false" 
+      href="http://www.director-online.com/help.html"><IMG height=25 
+      alt="What do these buttons do?" src="buildArticle_files/help.gif" width=25 
+      border=0></A> </TD></TR></TBODY></TABLE>
+<P><FONT face="Verdana, Arial, Geneva, Helvetica, sans-serif" size=+2><B>Lingo 
+Lounge</B></FONT><BR><FONT face="Verdana, Arial, Geneva, Helvetica, sans-serif" 
+color=#cc0000 size=+1><B>Lingo Collision Detection, Part 1</B></FONT> 
+<P><FONT size=-1>by <A href="mailto:lingolounge@director-online.com">Gary 
+Rosenzweig</A> </FONT>
+<P>
+<TABLE cellSpacing=0 cellPadding=0 width=500 border=0>
+  <TBODY>
+  <TR>
+    <TD vAlign=top>
+      <P>In order to build many types of games and some other types of 
+      interactive movies, you need to use collision detection. Collision 
+      detection is simply when you detect that one object on the screen overlaps 
+      another. They collide. This could be a laser blast hitting a target, or a 
+      character hitting a wall. In both cases, the two objects will overlap and 
+      action must be taken. 
+      <P>Director has several Lingo functions that are meant to be used for 
+      collision detection. Unfortunately, these functions fall far short of what 
+      is needed for quality collision detection. This week, we will look at what 
+      Director 8 has got and why it is inadequate. 
+      <P>The easiest function to use is the intersects function. By using an 
+      unconventional syntax, you can simply ask if two sprites intersect on the 
+      Stage. 
+      <P><FONT face="Verdana, Arial, Helvetica, sans-serif" color=#000000 
+      size=-1><FONT color=#0000c8>if</FONT> <FONT color=#008000>sprite</FONT> 
+      <FONT color=#808080>8</FONT> <FONT color=#008000>intersects</FONT> <FONT 
+      color=#808080>12</FONT> <FONT color=#0000c8>then</FONT></FONT></P>
+      <P>One thing to note about the intersects function is that it will work 
+      with irregularly-shaped objects. However, the ink of such sprites should 
+      be set to matte. Only then will you be able to rule out false collisions 
+      that happen when the rectangles of the sprites intersect, but the shape of 
+      the sprites do not. This movie demonstrates using intersects with the 
+      matte ink. 
+      <P>
+      <OBJECT 
+      codeBase=http://active.macromedia.com/director/cabs/sw.cab#version=6,0,1,0 
+      classid=clsid:166B1BCA-3F9C-11CF-8075-444553540000 width=200 height=150><PARAM NAME="SRC" VALUE="howTo/other/LL011.dcr"><PARAM NAME="swRemote" VALUE="swTarget='false'"><PARAM NAME="swLiveConnect" VALUE="FALSE">
+      <embed src="howTo/other/LL011.dcr"
+      pluginspage="http://www.macromedia.com/shockwave/download/" 
+      type="application/x-director" width="200" height="150" 
+      swLiveConnect="FALSE"  swRemote="swTarget='false'"></embed> </OBJECT>
+      <P>Move the red ball around by clicking and dragging it.<BR>Director 8 
+      download for <A 
+      href="http://www.director-online.com/howTo/other/LL011.hqx">Mac</A> or <A 
+      href="http://www.director-online.com/howTo/other/LL011.zip">Windows</A>. 
+      <P>This method has one major flaw. You cannot use it until the sprites 
+      have repositioned themselves on the screen. This means that you must 
+      either use updateStage, or let the frame loop, before you can accurately 
+      use intersects to determine if there has been a collision. 
+      <P>For some things, like a laser blast hitting a spaceship, this is fine. 
+      You can deal with the fact that for a fraction of a second, the laser 
+      blast appears over or under the ship, then in the next fraction of a 
+      second, the explosion occurs. However, for other things, like a character 
+      hitting a wall, this is unacceptable. You should not be showing the 
+      character embedded in the wall, even for just a fraction of a second. 
+      <P>Another method for detecting collisions is to use the intersect 
+      function. This is intersect, with no "s", which is a totally different 
+      function than intersects. It also behaves like a normal function, taking 
+      two rects as parameters and returning a rect. Here is an example from the 
+      Message window: 
+      <P><PRE>r1 = rect(50,50,100,100)
+r2 = rect(80,80,120,120)
+put intersect(r1,r2)
+-- rect(80, 80, 100, 100)
+</PRE>
+      <P>The returned value is the rectangle shared by both of the other 
+      rectangles. If the two rectangles do not intersect, then it returns 
+      rect(0,0,0,0). You can use this for collision detection by testing the 
+      intersect of two rectangles to see if it is rect(0,0,0,0). If it is not, 
+      then they have collided. 
+      <P><FONT face="Verdana, Arial, Helvetica, sans-serif" color=#000000 
+      size=-1><FONT color=#0000c8>if</FONT> <FONT 
+      color=#008000>intersect</FONT>(<FONT color=#008000>sprite</FONT>(<FONT 
+      color=#808080>1</FONT>).<FONT color=#008000>rect</FONT>,<FONT 
+      color=#008000>sprite</FONT>(<FONT color=#808080>2</FONT>).<FONT 
+      color=#008000>rect</FONT>) &lt;&gt; <FONT color=#008000>rect</FONT>(<FONT 
+      color=#808080>0</FONT>,<FONT color=#808080>0</FONT>,<FONT 
+      color=#808080>0</FONT>,<FONT color=#808080>0</FONT>) <FONT 
+      color=#0000c8>then</FONT></FONT></P>
+      <P>This method suffers from two flaws. The first is that you can only test 
+      to see if the sprite's rectangles have intersected. You cannot use this 
+      with irregular shapes the way you can with intersects and the matte ink. 
+      The second flaw is the same flaw as intersects: you cannot determine if a 
+      collision has occurred until the stage has been updated. However, 
+      intersect offers a way around this that we will look at next week. 
+      <P>One function like the intersect function is the inside function. It 
+      will check to see if a single point is inside a rectangle. Here is an 
+      example: 
+      <P><FONT face="Verdana, Arial, Helvetica, sans-serif" color=#000000 
+      size=-1><FONT color=#0000c8>if</FONT> <FONT 
+      color=#008000>inside</FONT>(<FONT color=#008000>sprite</FONT>(<FONT 
+      color=#808080>1</FONT>).<FONT color=#008000>loc</FONT>,<FONT 
+      color=#008000>sprite</FONT>(<FONT color=#808080>2</FONT>).<FONT 
+      color=#008000>rect</FONT>) <FONT color=#0000c8>then</FONT></FONT></P>
+      <P>This is useful when the moving object, such as a laser blast, is very 
+      small. In this case, you don't need to be that precise as to whether the 
+      whole shape of the moving object has intruded on the other object. 
+      <P>The inside function suffers from the same two flaws that the intersect 
+      function suffers from: no shape precision and no pre-screen update use. 
+      <P>There are also some other ways to determine whether two objects 
+      collide. These don't use a specific Lingo function, but will use some 
+      mathematical Lingo instead. One of my favorites is the distance formula. 
+      You can use this to determine how close points are from each other. Here 
+      is an example. "p1" and "p2" are two point variables: 
+      <P><FONT face="Verdana, Arial, Helvetica, sans-serif" color=#000000 
+      size=-1>dist = <FONT color=#008000>sqrt</FONT>(<FONT 
+      color=#008000>power</FONT>(p1.<FONT color=#008000>locH</FONT>-p2.<FONT 
+      color=#008000>locH</FONT>,<FONT color=#808080>2</FONT>)+<FONT 
+      color=#008000>power</FONT>(p1.<FONT color=#008000>locV</FONT>-p2.<FONT 
+      color=#008000>locV</FONT>,<FONT color=#808080>2</FONT>))<BR><FONT 
+      color=#0000c8>if</FONT> dist &lt; <FONT color=#808080>10</FONT> <FONT 
+      color=#0000c8>then</FONT><BR>&nbsp;&nbsp;</FONT></P>
+      <P>What's all this? If you are not into mathematics, then you probably 
+      don't know. The first line of this function takes the difference between 
+      the horizontal and vertical locations of the points, squares them, adds 
+      the two, and then takes the square root of the whole thing. It is the 
+      distance formula used in high school math class. The end result is the 
+      actual distance, in pixels between point "p1" and point "p2". 
+      <P>You can use this to determine when circular objects collide. If a ball 
+      is 5 pixels in diameter, and another ball is also 5 pixels in diameter, 
+      then they have collided if the distance between the center of both balls 
+      is less than 10 pixels. 
+      <P>You can also use it to estimate collisions among objects that are 
+      nearly circular. For instance, if you have a spaceship shaped like a 
+      triangle, and it is about 12 pixels long, then you may want to look for 
+      objects that come closer than 5 or 6 pixels. 
+      <P>You can use this same mathematical approach for a variety of forms of 
+      collision detection. For instance, if you have an object that is short and 
+      wide, you can detect if the other object is within a certain number of 
+      pixels to the left or right of the object, and a certain amount of pixels 
+      above or below it. This piece of code checks to see if one point is within 
+      ten pixels horizontally and 4 pixels vertically of the other object. 
+      <P><FONT face="Verdana, Arial, Helvetica, sans-serif" color=#000000 
+      size=-1><FONT color=#0000c8>if</FONT> <FONT 
+      color=#008000>abs</FONT>(p1.<FONT color=#008000>locH</FONT>-p2.<FONT 
+      color=#008000>locV</FONT>) &lt; <FONT color=#808080>10</FONT> <FONT 
+      color=#0000c8>and</FONT> <FONT color=#008000>abs</FONT>(p1.<FONT 
+      color=#008000>locV</FONT>-p2.<FONT color=#008000>locV</FONT>) &lt; <FONT 
+      color=#808080>4</FONT> <FONT color=#0000c8>then</FONT></FONT></P>
+      <P>The abs function (absolute value) simply takes a number and returns it 
+      as a positive number, regardless of its sign beforehand. So abs(-7) is 7, 
+      and abs(7) is also 7. By using abs, we avoid having to make sure that the 
+      point is both less than 10 pixels to the right and less than ten pixels to 
+      the left. Instead, we can just figure out if it is within 10 pixels. 
+      <P>If you are good at math, you can use even more complex formulae to look 
+      for collisions in objects of other shapes. I occasionally use the ellipse 
+      formula, for instance. 
+      <P>One last Lingo function, that I would be remiss if I did not mention, 
+      is the hitTest function. This works with vector shape and Flash members 
+      only. When given a point, it will return either #background or #normal, 
+      depending on what is present at that location. Its use is limited because 
+      of the huge speed hit that vector shapes and Flash movies deliver to a 
+      movie, and because you can only use it with a single point. There is no 
+      easy way to use hitTest to determine if any part of one object intersects 
+      another. 
+      <P>Next week, I will take a second look at the intersect function and show 
+      you how to use it without updating the Stage first. 
+      <P>Gary Rosenzweig's latest book is "Advanced Lingo for Games." In it, you 
+      can find the source code for more than 20 complete games. More information 
+      about the book can be found at <A target=_blank 
+      href="http://clevermedia.com/resources/bookstore/book4.html">http://clevermedia.com/resources/bookstore/book4.html</A>. 
+      It can be purchased there, or in your local bookstore. 
+</P></TD></TR></TBODY></TABLE>
+<P>
+<TABLE width=500>
+  <TBODY>
+  <TR>
+    <TD><FONT size=-1>Gary Rosenzweig is the Chief Engineer, founder, and 
+      owner of CleverMedia, a game and multimedia development company in Denver, 
+      Colorado. He has written four books on Macromedia Director and speaks 
+      regularly at Macromedia and Game Developer conferences. CleverMedia's four 
+      sites of games can be found at <A target=_blank 
+      href="http://clevermedia.com/">http://clevermedia.com/</A>. 
+      <P></FONT></P></TD></TR></TBODY></TABLE>
+<P>
+<TABLE height=25 cellSpacing=0 cellPadding=0 width=500 border=0>
+  <TBODY>
+  <TR vAlign=top align=left bgColor=#cecece>
+    <TD><A 
+      onmouseover="window.status='Get the direct URL for this article'; return true" 
+      onclick="MM_openBrWindow('generateURL.cfm?id=848','utility','scrollbars=yes,resizable=no,width=400,height=250'); return false" 
+      href="http://www.director-online.com/generateURL.cfm?id=848"><IMG 
+      height=25 alt="Get the direct URL for this article" 
+      src="buildArticle_files/articleURL.gif" width=87 border=0></A> </TD>
+    <TD><A 
+      onmouseover="window.status='Visit the Lingo Lounge article archive'; return true" 
+      href="http://www.director-online.com/archive.cfm?pSection=Lingo%20Lounge"><IMG 
+      height=25 alt="Visit the Lingo Lounge article archive" 
+      src="buildArticle_files/archives.gif" width=66 border=0></A> </TD>
+    <TD><A 
+      onmouseover="window.status='Check out other articles by Gary Rosenzweig'; return true" 
+      href="http://www.director-online.com/buildAuthorsArticles.cfm?author=50"><IMG 
+      height=25 alt="Check out other articles by Gary Rosenzweig" 
+      src="buildArticle_files/author.gif" width=56 border=0></A> </TD>
+    <TD><A 
+      onmouseover="window.status='Mail this article to a friend'; return true" 
+      onclick="MM_openBrWindow('emailArticle.cfm?id=848','utility','scrollbars=yes,resizable=no,width=400,height=400'); return false" 
+      href="http://www.director-online.com/emailArticle.cfm?id=848"><IMG 
+      height=25 alt="Mail this article to a friend" 
+      src="buildArticle_files/mailArticle.gif" width=83 border=0></A> </TD>
+    <TD><A 
+      onmouseover="window.status='Sign in to your myDOUG page'; return true" 
+      onclick="MM_openBrWindow('myDOUG/login.cfm?type=toolbar','utility','scrollbars=yes,resizable=no,width=525,height=400'); return false" 
+      href="http://www.director-online.com/myDOUG/login.cfm?type=toolbar"><IMG 
+      height=25 alt="Sign in to your myDOUG page" 
+      src="buildArticle_files/signIn.gif" width=63 border=0></A> </TD>
+    <TD><A 
+      onmouseover="window.status='Discuss this article on DOUGthreads'; return true" 
+      href="http://209.112.84.34/Forums/index.cfm?cfapp=2&amp;Thread_ID=2491"><IMG 
+      height=25 alt="Discuss this article on DOUGthreads" 
+      src="buildArticle_files/discussArticle.gif" width=105 border=0></A> </TD>
+    <TD><A 
+      onmouseover="window.status='What do these buttons do?'; return true" 
+      onclick="MM_openBrWindow('help.html','utility','scrollbars=yes,resizable=no,width=400,height=250'); return false" 
+      href="http://www.director-online.com/help.html"><IMG height=25 
+      alt="What do these buttons do?" src="buildArticle_files/help.gif" width=25 
+      border=0></A> </TD></TR></TBODY></TABLE>
+<P> </P></BODY></HTML>
