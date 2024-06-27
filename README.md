@@ -1,2 +1,2 @@
-# MaMaccromedia-Director-Showcase
-Maccromedia Director Showcase
+# Macromedia-Director-Showcase
+Macromedia Director Showcase
