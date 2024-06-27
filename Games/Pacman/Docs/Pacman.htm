@@ -1,0 +1,411 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0054)http://www.director-online.com/buildArticle.cfm?id=815 -->
+<HTML><HEAD><TITLE>A Director Online article</TITLE>
+<META content="pixelgeek design &amp; communications" name=Author>
+<META content="text/html; charset=iso-8859-1" http-equiv=Content-Type>
+<SCRIPT language=JavaScript>
+    <!--
+    function MM_openBrWindow(theURL,winName,features) { //v1.2
+      window.open(theURL,winName,features);
+    }
+    //-->
+</SCRIPT>
+
+<META content="MSHTML 5.00.3013.2600" name=GENERATOR></HEAD>
+<BODY aLink=#425294 bgColor=#ffffff link=#425294 text=#000000 vLink=#31427b>
+<P><BR>
+<TABLE border=0 cellPadding=0 cellSpacing=0 height=25 width=500>
+  <TBODY>
+  <TR align=left bgColor=#cecece vAlign=top>
+    <TD><A href="http://www.director-online.com/generateURL.cfm?id=815" 
+      onclick="MM_openBrWindow('generateURL.cfm?id=815','utility','scrollbars=yes,resizable=no,width=400,height=250'); return false" 
+      onmouseover="window.status='Get the direct URL for this article'; return true"><IMG 
+      alt="Get the direct URL for this article" border=0 height=25 
+      src="Pacman_files/articleURL.gif" width=87></A> </TD>
+    <TD><A 
+      href="http://www.director-online.com/archive.cfm?pSection=Using%20Director" 
+      onmouseover="window.status='Visit the Using Director article archive'; return true"><IMG 
+      alt="Visit the Using Director article archive" border=0 height=25 
+      src="Pacman_files/archives.gif" width=66></A> </TD>
+    <TD><A 
+      href="http://www.director-online.com/buildAuthorsArticles.cfm?author=51" 
+      onmouseover="window.status='Check out other articles by Mika Tuupola'; return true"><IMG 
+      alt="Check out other articles by Mika Tuupola" border=0 height=25 
+      src="Pacman_files/author.gif" width=56></A> </TD>
+    <TD><A href="http://www.director-online.com/emailArticle.cfm?id=815" 
+      onclick="MM_openBrWindow('emailArticle.cfm?id=815','utility','scrollbars=yes,resizable=no,width=400,height=400'); return false" 
+      onmouseover="window.status='Mail this article to a friend'; return true"><IMG 
+      alt="Mail this article to a friend" border=0 height=25 
+      src="Pacman_files/mailArticle.gif" width=83></A> </TD>
+    <TD><A href="http://www.director-online.com/myDOUG/login.cfm?type=toolbar" 
+      onclick="MM_openBrWindow('myDOUG/login.cfm?type=toolbar','utility','scrollbars=yes,resizable=no,width=525,height=400'); return false" 
+      onmouseover="window.status='Sign in to your myDOUG page'; return true"><IMG 
+      alt="Sign in to your myDOUG page" border=0 height=25 
+      src="Pacman_files/signIn.gif" width=63></A> </TD>
+    <TD><A 
+      href="http://www.developernation.com/Forums/index.cfm?cfapp=2&amp;Thread_ID=1918" 
+      onmouseover="window.status='Discuss this article on DOUGthreads'; return true"><IMG 
+      alt="Discuss this article on DOUGthreads" border=0 height=25 
+      src="Pacman_files/discussArticle.gif" width=105></A> </TD>
+    <TD><A href="http://www.director-online.com/help.html" 
+      onclick="MM_openBrWindow('help.html','utility','scrollbars=yes,resizable=no,width=400,height=250'); return false" 
+      onmouseover="window.status='What do these buttons do?'; return true"><IMG 
+      alt="What do these buttons do?" border=0 height=25 
+      src="Pacman_files/help.gif" width=25></A> </TD></TR></TBODY></TABLE>
+<P><FONT face="Verdana, Arial, Geneva, Helvetica, sans-serif" size=+2><B>Using 
+Director</B></FONT><BR><FONT color=#cc0000 
+face="Verdana, Arial, Geneva, Helvetica, sans-serif" size=+1><B>Pacman-style 
+games in Director</B></FONT> 
+<P><FONT size=-1>by <A href="mailto:tuupola@taivas.com">Mika Tuupola</A> </FONT>
+<P>
+<TABLE border=0 cellPadding=0 cellSpacing=0 width=500>
+  <TBODY>
+  <TR>
+    <TD vAlign=top>tile graphics by <A 
+      href="mailto:kelta@saunalahti.fi">Kelta</A> 
+      <P>A Pacman style game was one of the first thing I did when I started to 
+      learn Director. The version was 6.5. Soon Macromedia introduced Director 7 
+      and I switched to it. Since Lingo with the new dot syntax looked more like 
+      a real programming language I rewrote a new version of the game for this 
+      article. 
+      <P>This article does not give you a finished game. The source is a 
+      simplified version of the game. That means all the fine tuning was left 
+      out (effects, powerups, score system etc.) so you have some brainwork to 
+      do yourself. I will try the explain all the theory and logic behind my 
+      approach. While you read this it is a good idea to open the source code of 
+      the example movie to find out how all of this was implemented. Code should 
+      be well commented. 
+      <P>When reading the code please note that all the globals start with a 
+      letter "g" and properties with letter "p". For example gfoo or pbar. 
+    </P></TD></TR></TBODY></TABLE>
+<TABLE border=0 cellPadding=0 cellSpacing=0 width=500>
+  <TBODY>
+  <TR>
+    <TD vAlign=top>
+      
+      <P>Download this demo for <A 
+      href="http://www.director-online.com/howTo/other/UD109.hqx">Mac</A> or <A 
+      href="http://www.director-online.com/howTo/other/UD109.zip">PC</A>. This 
+      is a Director 7 movie. </P></TD></TR></TBODY></TABLE>
+<TABLE border=0 cellPadding=0 cellSpacing=0 width=500>
+  <TBODY>
+  <TR>
+    <TD vAlign=top><BR>
+      <H4><FONT color=#cc0000 
+      face="Verdana, Arial, Geneva, Helvetica, sans-serif">Constructing the 
+      Maze</FONT></H4>
+      <P><FONT face="Verdana, Arial, Geneva, Helvetica, sans-serif" 
+      size=-1><B>The usual way</B></FONT> 
+      <P>When people do their first Pacman game in Director they tend to 
+      implement that by building the walls of maze from different sizes of 
+      square sprites. The player sprite is moved freely and checked for 
+      collisions against these walls. This kind of "free range" maze might first 
+      look like an easy solution but the truth is (in my opinion) different. 
+      <P>First of all it's quite hard to align the wall so that player is able 
+      to move only horizontally or vertically and not both in a hallway. The 
+      result is usually awkward movement. For example when a player presses up 
+      in a vertical hallway, moves one or two pixels up, collides with a wall 
+      and stops. This is not very playable. The enemy AI (artificial 
+      intelligence) would also be quite a pain to do. 
+      <P>My advice would be to forget freerange mazes. 
+      <P><FONT face="Verdana, Arial, Geneva, Helvetica, sans-serif" 
+      size=-1><B>Tile based approach</B></FONT> 
+      <P>In many arcade games the graphics are still built from tiles. In fact 
+      in some systems (Nintendo Gameboy for example) everything is built from 
+      tiles. This is the approach I'll be discussing here. 
+      <P><FONT face="Verdana, Arial, Geneva, Helvetica, sans-serif" 
+      size=-1><B>The 2d table</B></FONT> 
+      <P>On my approach all the logic is done on a 2d table and its coordinates. 
+      These coordinates are not to be confused with stage coordinates. The table 
+      can be virtually any size. Only the visible part is limited by the number 
+      of available sprite channels. The basis of the playfield is visualized by 
+      constructing a grid from a cast member called "emptytile". The tile 
+      corresponding to location x=1, y=1 on 2d table is in sprite channel 1; 
+      x=2, y=1 is in sprite channel 2 continuing to the last tile, x=10, y=10 in 
+      sprite channel 100. 
+      <P><IMG alt="" border=0 height=297 src="Pacman_files/UD109_01.gif" 
+      width=260> 
+      <P>The downside for this approach is that it needs one channel for each 
+      tile in the 2d table. The big advantage is the possibility of easily 
+      creating a level editor. This brings out many possibilities such as users 
+      creating their own levels which they can save on your server or send to 
+      their friends by email. 
+      <P>A primitive level editor is included in the example source. You can try 
+      it by dragging some tiles to the grid. The editor is dumb and allows you 
+      to build illegal combinations of tiles side by side (someone might call 
+      this a feature, since it enables oneway doors ;). 
+      <P><IMG alt="" border=0 height=64 src="Pacman_files/UD109_02.gif" 
+      width=96> 
+      <P>Gametable data is stored in global gtable. Global stores width and 
+      height of the table and all the tiles for the gametable row by row. After 
+      calling inittable() it looks like this: 
+      <P><PRE><FONT color=#cc0000>put gtable
+-- [#w: 10, #h: 10, #data: [
+  ["0", "0", "0", "0", "0", "0", "0", "0", "0", "0"], 
+  ["0", "0", "0", "0", "0", "0", "0", "0", "0", "0"], 
+  ["0", "0", "0", "0", "0", "0", "0", "0", "0", "0"], 
+  ["0", "0", "0", "0", "0", "0", "0", "0", "0", "0"], 
+  ["0", "0", "0", "0", "0", "0", "0", "0", "0", "0"], 
+  ["0", "0", "0", "0", "0", "0", "0", "0", "0", "0"], 
+  ["0", "0", "0", "0", "0", "0", "0", "0", "0", "0"], 
+  ["0", "0", "0", "0", "0", "0", "0", "0", "0", "0"], 
+  ["0", "0", "0", "0", "0", "0", "0", "0", "0", "0"], 
+  ["0", "0", "0", "0", "0", "0", "0", "0", "0", "0"] ] ]
+  </FONT></PRE>
+      <P>An individual tile in gametable data can be addressed with and set 
+      with: 
+      <P><PRE><FONT color=#cc0000>tile = gtable.data[y][x]
+gtable.data[y][x] = tile
+</FONT></PRE>
+      <P>We obviously need to be able to convert table coordinates to 
+      spritechannels: 
+      <P><PRE><FONT color=#cc0000>channel = (y-1) * gtable.w + x
+</FONT></PRE>
+      <P>And vice versa. These are a bit kludgish since first sprite channel is 
+      1 and I used coordinates starting at (1,1) instead of (0,0). Please see 
+      channel2table() in the source: 
+      <P><PRE><FONT color=#cc0000>x = channel mod gtable.w
+y = channel / gtable.w + 1 
+</FONT></PRE>
+      <P>Every function dealing with the 2d gametable such as settable(), 
+      table2channel() or drawtile() are based on these formulas. Again, please 
+      see Game table in source. 
+      <H4><FONT color=#cc0000 
+      face="Verdana, Arial, Geneva, Helvetica, sans-serif">The 
+editor</FONT></H4>
+      <P>The editor part is really simple. Tile builder and modified Drag Snap 
+      (which came with Director) behaviours are attached to the builder tiles. 
+      The tiles snap to all the basetiles from which the grid is built. 
+      <P>When builder tile is dragged over and the mouse button is released the 
+      behaviour checks which basetile it intersects (it intersects only one 
+      because Drag Snap aligns it with one tile only) and calculates basetiles 
+      gametable coordinates: 
+      <P><PRE><FONT color=#cc0000>base = channel2table(chan)
+</FONT></PRE>
+      <P>Then it updates gametable data with the name of the dragged tile and 
+      draws the tile to stage: 
+      <P><PRE><FONT color=#cc0000>tile = pspriteref.member.name		
+settable(base.x, base.y, tile)
+drawtile(base.x, base.y, tile)	
+</FONT></PRE>
+      <P>Editor can be as simple as that. The rest of the code is just 
+      cosmetics. Check Base tile and Tile builder behaviours for more. 
+      <H4><FONT color=#cc0000 
+      face="Verdana, Arial, Geneva, Helvetica, sans-serif">The tiles</FONT></H4>
+      <P>In this example the maze is built from 32x32 pixel tiles. I use this 
+      size because of an old habit. (Accessing tile sizes as 8x8, 16x16 or 32x32 
+      from memory is fast in programming languages like C or Assembler. I'm 
+      pretty sure it doesn't make the Lingo code any faster though). There are 
+      16 different tiles each having a unique combination of number and 
+      direction of possible exits from the tile. Tiles are named from letter a 
+      to letter p. 
+      <P><IMG alt="" border=0 height=131 src="Pacman_files/UD109_03.gif" 
+      width=132> 
+      <P>Next we construct a list which holds attributes for each direction (up, 
+      down, left, right) on each tile: 1 (or TRUE) if exit is possible and 0 (or 
+      FALSE) if the exit is blocked. These values are held in global gmoves. I 
+      chose to use rect as datatype because it just happened to have four 
+      entries. I of course have used a property list of my own. After calling 
+      initblockmoves() the list looks like this: 
+      <P><PRE><FONT color=#cc0000>put gmoves
+-- [ "a": rect(0, 1, 1, 1), "b": rect(1, 0, 1, 1), 
+  "c": rect(1, 1, 0, 1), "d": rect(1, 1, 1, 0), 
+  "e": rect(0, 0, 1, 1), "f": rect(1, 0, 0, 1), 
+  "g": rect(1, 1, 0, 0), "h": rect(0, 1, 1, 0), 
+  "i": rect(0, 0, 0, 1), "j": rect(1, 0, 0, 0), 
+  "k": rect(0, 1, 0, 0), "l": rect(0, 0, 1, 0), 
+  "m": rect(0, 1, 0, 1), "n": rect(1, 0, 1, 0), 
+  "o": rect(1, 1, 1, 1), "p": rect(0, 0, 0, 0), 
+  "x": rect(1, 1, 1, 1)]
+  </FONT></PRE>
+      <P>These values are used everytime player or enemy sprite tries to move 
+      away from a tile using canigo(). For example, to check out if it's 
+      possible to go down from location x=8, y=6 we would ask: 
+      <P><PRE><FONT color=#cc0000>channel = table2channel(8,6)
+possible = sprite(channel).canigo(#down)
+</FONT></PRE>
+      <P>The purpose of gmoves list, how and why it is used, is one of the most 
+      important things to understand when figuring out how this game works. 
+      <H4><FONT color=#cc0000 
+      face="Verdana, Arial, Geneva, Helvetica, sans-serif">Movement in 
+      gametable</FONT></H4>
+      <P>All the logic happens in the gametable. If you check the Player and 
+      Enemy AI behaviours you can find the following if statement: 
+      <P><PRE><FONT color=#cc0000>if (pstatus = #there) then
+  ...
+end if
+</FONT></PRE>
+      <P>There are two possible pstatus values; #there and #moving. If pstatus 
+      is #moving, it means the sprite is still animating between two tiles. The 
+      animation is handled by a behaviour called Animation. 
+      <P>Behaviours Player and Enemy AI take care of what is the next tile where 
+      a sprite goes, nothing else. They work in gametable coordinates. The 
+      Animation behaviour however works in stage coordinates. It calculates what 
+      are the stage coordinates in the current gametable location of the sprite 
+      and what are the stage coordinates in the target location where it is 
+      going. It then animates the sprite between these stage coordinates. When 
+      the animation is done it gives the control back to Player or Enemy AI 
+      behaviour to decide the next target location again. 
+      <P>If you have trouble visualizing this, remove the Animation behaviour 
+      from player and enemy sprites. Drop the frame rate to 3 fps and attach No 
+      Animation behaviour to both sprites again. Now you can see how the logic 
+      works behind the scenes. 
+      <H4><FONT color=#cc0000 
+      face="Verdana, Arial, Geneva, Helvetica, sans-serif">Navigating the Player 
+      in the Maze</FONT></H4>
+      <P>Keypress is sent to player sprite in the usual way just by calling 
+      keydown(). You can find examples of this almost from every Director 
+      primer. To make the game more playable, the player sprite stores the last 
+      key pressed in property plastkey. 
+      <P>Always when it is finished animating between tiles: 
+      <P><PRE><FONT color=#cc0000>if (pstatus = #there) then
+</FONT></PRE>
+      <P>... the behaviour checks if its possible to turn to direction of the 
+      last keypress: 
+      <P><PRE><FONT color=#cc0000>channel = table2channel(pcurrent.x, pcurrent.y)
+canturn = sprite(channel).canimove(plastkey)
+</FONT></PRE>
+      <P>... and updates all needed variables. If the turn was not possible 
+      behaviour checks if it can continue to the old direction: 
+      <P><PRE><FONT color=#cc0000>possible = sprite(channel).canimove(pwannago)
+</FONT></PRE>
+      <P>And again, if it was possible to continue, it updates all the needed 
+      variables. If a special case where neither movement to plastkey nor 
+      pwannago was possible the sprite just sits in the corner / deadend and 
+      waits for user input. 
+      <P>Check the Player behaviour for full sourcecode. 
+      <H4><FONT color=#cc0000 
+      face="Verdana, Arial, Geneva, Helvetica, sans-serif">Enemy AI in 
+      maze</FONT></H4>
+      <P><FONT face="Verdana, Arial, Geneva, Helvetica, sans-serif" 
+      size=-1><B>Crash 'n turn algorithm</B></FONT> 
+      <P>Even though this algorithm is not very effective it is perfect for this 
+      example because it is one of the easiest to implement and it is adequate 
+      for pacman style games since they themselves aren't too complicated (if 
+      comparing to real-time hex based strategy games or alike). 
+      <P>In the most basic form this algorithm goes like this: 
+      <P>
+      <OL>
+        <LI>Calculate straight line from current location to target location and 
+        try to move to the next tile in that direction. 
+        <LI>If it collides with an obstacle turn right until free passage is 
+        found and then move to the tile that direction. 
+        <LI>Repeat 1 - 2 until we have reached the target location <B>or</B> we 
+        have collided with previous tile. 
+        <LI>If we collided with previous tile (the tile we came from) change the 
+        direction of turning and go through same 1 - 2 loop (this time just 
+        turning to another direction) </LI></OL>
+      <P>There are some concerns you should note in here. What happens if enemy 
+      walks into dead end? Yup. The algorithm locks since it is not allowed to 
+      go back to the tile it previously came from (there is a reason for this. 
+      If it was allowed to return to previous tile, there would be situations 
+      where enemy would start to run aimlessly back and forth between two 
+      tiles). So what we need to do is to modify step 3 a bit. 
+      <P>
+      <OL start=3>
+        <LI>Repeat 1 - 2 until we have reached the target location <B>or</B> we 
+        have collided with previous tile <B>and</B> we have <B>not</B> collided 
+        with previous tile before in this turn. </LI></OL>
+      <P><B>Note:</B> Since the player sprite is not stationary we need to 
+      calculate new direction (step 1) everytime we move to the next tile. 
+      <P>The behaviour first finds the direction to the player using 
+      finddirection() function. I made a shortcut here and didn't implement any 
+      real linedrawing algorithm. Instead it compares difference between x and y 
+      coordinates between enemy and player (target) sprites: 
+      <P><PRE><FONT color=#cc0000>xdiff = pcurrent.x - sprite(target).pcurrent.x
+ydiff = pcurrent.y - sprite(target).pcurrent.y
+</FONT></PRE>
+      <P>Then, whichever is bigger, the function returns a direction depending 
+      whether the difference is positive or negative. For example if abs(ydiff) 
+      is bigger than abs(xdiff) and ydiff is negative (player y is bigger than 
+      enemy y) the direction to go is down. 
+      <P>The behaviour then tries to move where finddirection() told it to. If 
+      that was not possible: 
+      <P><PRE><FONT color=#cc0000>if ((not possible) or (previous)) then
+  ...
+end if
+</FONT></PRE>
+      <P>It jumps into the mainloop: 
+      <P><PRE><FONT color=#cc0000>repeat while ((not possible) or (previous))
+  ...
+end repeat
+</FONT></PRE>
+      <P>The code then turns where the enemy is heading. It also updates the 
+      needed variables and makes the possible / previous checks again. If it 
+      collides with the previous tile and it is the first time it collides with 
+      it, the behaviour just changes the direction of turning. If it collides 
+      with previous tile second time, the behaviour notices that it is in a dead 
+      end and forces the enemy to make a u-turn. 
+      <P>When the loop has exited and the new direction is found, pstatus is 
+      updated again to #moving and animation behaviour takes control. 
+      <H4><FONT color=#cc0000 
+      face="Verdana, Arial, Geneva, Helvetica, sans-serif">Homework</FONT></H4>
+      <P>As I said, this is not a finished game. However, it should be enough to 
+      help anyone finish their own Pacman game. A few things just need to be 
+      added: the eatable dots, powerups, more enemies etc. 
+      <P>The level editor can be improved quite a lot. Autojunctioning would be 
+      a nice feature. It also shouldn't allow impossible combinations of tiles. 
+      <P>You should also make different kind of behaviour models for the enemy 
+      AI to make the game more interesting. Here are some possible ideas: 
+      <P>
+      <OL>
+        <LI>Waypoint patroling. Enemies just patrol between some predefined 
+        coordinates. 
+        <LI>Bloodhounds. Enemies just wonder aimlessly until they get a 'scent' 
+        (get close enough) to the player and then chase player at double speed. 
+        <LI>Roadblockers. They calculate location of the next junction in maze 
+        where player is heading and move there trying to 'block' the road and 
+        thus effectively trapping the player. 
+        <LI>Any combination of the above (1+2 is quite effective) </LI></OL>
+      <P>Have fun! If you use this, drop me an e-mail. </P></TD></TR></TBODY></TABLE>
+<P>
+<TABLE width=500>
+  <TBODY>
+  <TR>
+    <TD><FONT size=-1>Originally coming from a Unix administration / 
+      programming background, Mika currently works as a technical designer for 
+      Taivas HEL Oy, located in Helsinki, Finland. HEL's clients include MTV 
+      Europe, Diesel s.p.a., Sprite and Radiolinja (a major Finnish telecom 
+      operator). They are also known for <A href="http://www.hel13.com/" 
+      target=_blank>HEL13</A>, their own design magazine. 
+      <P></FONT></P></TD></TR></TBODY></TABLE>
+<P>
+<TABLE border=0 cellPadding=0 cellSpacing=0 height=25 width=500>
+  <TBODY>
+  <TR align=left bgColor=#cecece vAlign=top>
+    <TD><A href="http://www.director-online.com/generateURL.cfm?id=815" 
+      onclick="MM_openBrWindow('generateURL.cfm?id=815','utility','scrollbars=yes,resizable=no,width=400,height=250'); return false" 
+      onmouseover="window.status='Get the direct URL for this article'; return true"><IMG 
+      alt="Get the direct URL for this article" border=0 height=25 
+      src="Pacman_files/articleURL.gif" width=87></A> </TD>
+    <TD><A 
+      href="http://www.director-online.com/archive.cfm?pSection=Using%20Director" 
+      onmouseover="window.status='Visit the Using Director article archive'; return true"><IMG 
+      alt="Visit the Using Director article archive" border=0 height=25 
+      src="Pacman_files/archives.gif" width=66></A> </TD>
+    <TD><A 
+      href="http://www.director-online.com/buildAuthorsArticles.cfm?author=51" 
+      onmouseover="window.status='Check out other articles by Mika Tuupola'; return true"><IMG 
+      alt="Check out other articles by Mika Tuupola" border=0 height=25 
+      src="Pacman_files/author.gif" width=56></A> </TD>
+    <TD><A href="http://www.director-online.com/emailArticle.cfm?id=815" 
+      onclick="MM_openBrWindow('emailArticle.cfm?id=815','utility','scrollbars=yes,resizable=no,width=400,height=400'); return false" 
+      onmouseover="window.status='Mail this article to a friend'; return true"><IMG 
+      alt="Mail this article to a friend" border=0 height=25 
+      src="Pacman_files/mailArticle.gif" width=83></A> </TD>
+    <TD><A href="http://www.director-online.com/myDOUG/login.cfm?type=toolbar" 
+      onclick="MM_openBrWindow('myDOUG/login.cfm?type=toolbar','utility','scrollbars=yes,resizable=no,width=525,height=400'); return false" 
+      onmouseover="window.status='Sign in to your myDOUG page'; return true"><IMG 
+      alt="Sign in to your myDOUG page" border=0 height=25 
+      src="Pacman_files/signIn.gif" width=63></A> </TD>
+    <TD><A 
+      href="http://www.developernation.com/Forums/index.cfm?cfapp=2&amp;Thread_ID=1918" 
+      onmouseover="window.status='Discuss this article on DOUGthreads'; return true"><IMG 
+      alt="Discuss this article on DOUGthreads" border=0 height=25 
+      src="Pacman_files/discussArticle.gif" width=105></A> </TD>
+    <TD><A href="http://www.director-online.com/help.html" 
+      onclick="MM_openBrWindow('help.html','utility','scrollbars=yes,resizable=no,width=400,height=250'); return false" 
+      onmouseover="window.status='What do these buttons do?'; return true"><IMG 
+      alt="What do these buttons do?" border=0 height=25 
+      src="Pacman_files/help.gif" width=25></A> </TD></TR></TBODY></TABLE>
+<P> </P></BODY></HTML>
