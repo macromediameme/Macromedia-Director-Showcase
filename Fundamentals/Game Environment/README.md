@@ -2,15 +2,7 @@
 
 <head>
 <title>6/21/99 - Creating a game environment</title>
-<script LANGUAGE="JavaScript">
- <!--
- if (top.location.href.indexOf("index.htm") == -1) {	
-theurl = location.href.toString();
- + theurl + "^2";
- top.location.href = newframe;	
-}
- // --> 
-</script>
+
 </head>
 
 <body bgcolor="#FFFFFF" topmargin="0" leftmargin="0" marginwidth="0" marginheight="0"><center>
