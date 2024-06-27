@@ -1,0 +1,324 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+
+<html>
+
+<head>
+<title>documentation for LPUtils Xtra for use with Director v5</title>
+<meta name="GENERATOR" content="Microsoft FrontPage 1.1">
+</head>
+
+<body bgcolor="#FFFFFF">
+<p><font size=5>FileXtra v2.0.5 Docs </font></p>
+<p><font size=4>26-May-97 </font></p>
+<p><i>FileXtra v2 is a free extension for use with MacroMedia Director v5 or later that performs file, directory and 
+disk operations such as copy, delete and rename.</i> </p>
+<p>Documentation and program are copyright &#169; 1996-97 by: </p>
+<dl>
+<dd>Little Planet Publishing </dd>
+<dd>5045 Hillsboro Road </dd>
+<dd>Nashville, TN 37215 </dd>
+</dl>
+<p>Program and documentation were written by Kent Kersten, Little Planet Publishing (<a href="mailto:kent@littleplanet.com">kent@littleplanet.com</a>). </p>
+<p>Please be aware that the Xtras, sample movies and documentation are all provided &#147;as-is&#148;, without any kind of 
+warranty or suitability statements whatsoever. You use them at your own risk and we are in no way responsible for any 
+consequences. </p>
+<p>If you find this Xtra useful and are feeling generous, I would personally be very grateful if you would make a 
+contribution to the following non-profit organization:</p>
+<dl>
+<dd>Nashville Children&#146;s Theatre</dd>
+<dd>724 Second Avenue South</dd>
+<dd>Nashville, TN 37210</dd>
+<dd>(615) 254-9103</dd>
+</dl>
+<p>This is an organization with a long history of serving the children of Nashville with arts entertainment and education. I 
+would suggest a donation of $20, but any amount would be appreciated. Please note that making a contribution is NOT 
+a requirement to use this Xtra.</p>
+<p><b>Target platforms:</b> </p>
+<dl>
+<dd>Macintosh 68K </dd>
+<dd>Macintosh PowerPC </dd>
+<dd>Windows 3.1 </dd>
+<dd>Windows 95/NT </dd>
+</dl>
+<p>The Macintosh versions are combined in a single &#147;FAT&#148; binary Xtra named FileXtra. The Windows 3.1 version is 
+named FileXtra.x16 (for 16-bit Windows platforms) and the Windows 95/NT version is named FileXtra.x32 (for 
+32-bit Windows platforms). </p>
+<p><b>How to use it:</b> </p>
+<p>Simply drop it into the Xtras folder or directory that your copy of Director uses. </p>
+<p>For authoring on the Macintosh, place the Xtra into the folder named &#147;Xtras&#148; that resides in the folder where the 
+Director application is installed. For use with Macintosh projectors, create a folder named &#147;Xtras&#148; that resides in the 
+folder where the projector is installed and place FileXtra there. </p>
+<p>For authoring on the PC, place FileXtra.x16 into the directory named &#147;Xtras&#148; that resides in the directory where the 
+16-bit Director application is installed. For use with 16-bit PC projectors, create a directory named &#147;Xtras&#148; that resides 
+in the directory where the projector is installed and place FileXtra.x16 there. </p>
+<p>For the 32-bit PC version of Director, place FileXtra.x32 into the directory named &#147;Xtras&#148; that resides in the directory 
+where the 32-bit Director application is installed. For use with 32-bit PC projectors, create a directory named &#147;Xtras&#148; 
+that resides in the directory where the projector is installed and place FileXtra.x32 there. </p>
+<p>To get a quick overview of the available functions, type the following into Director's Message window: </p>
+<dl>
+<dd><i>put mMessageList(xtra &#147;FileXtra&#148;)</i> </dd>
+</dl>
+<hr>
+<p><b>Initialization:</b> </p>
+<p>There are no &#147;initialization&#148; or &#147;mNew&#148; calls to make if you place the Xtra into the proper directory (see above). The 
+new handlers simply exist when Director is launched. Likewise, there is no cleanup or &#147;mDispose&#148; calling to do. </p>
+<hr>
+<p><b>General notes:</b> </p>
+<p>1) On the Macintosh it sometimes is necessary when installing new Xtras to delete the file &#147;Director 5 Xtra Cache&#148; that 
+lives in the System Folder's &#147;Preferences&#148; folder. On occasion Director will fail to recognize new Xtras until you exit, 
+delete the cache file, then restart Director. </p>
+<p>2) FileXtra was formerly named &#147;FileUtil&#148;. Delete the older, less adequate version when installing. </p>
+<p>3) On a PC, both the .x16 and .x32 files can be together. Depending upon whether you are running 16- or 32-bit 
+Director, the correct file will be used automatically. </p>
+<p>4) The old version of the Xtra had a Macintosh-only call, <i>VolumesToList</i>, that is now present in both PC and Mac 
+versions and has been renamed to <i>DrivesToList</i>. </p>
+<p>5) Please see the FileXtra.dir movie for more examples. </p>
+<hr>
+<p><b>Supported calls:</b> </p>
+<p><u>Drive Functions: </u></p>
+<p><i>DriveExists(driveName)</i> </p>
+<dl>
+<dd>Pass the name of a drive to see if it exists. If it does, a 0 is returned. </dd>
+<dd>&#160;</dd>
+<dd><b><i>Windows example:</i></b> </dd>
+<dd><dl>
+<dd><i>retval = DriveExists(&#147;D:&#148;)</i> </dd>
+</dl>
+</dd>
+<dd><b><i>Mac example:</i></b> </dd>
+<dd><dl>
+<dd><i>retval = DriveExists(&#147;Macintosh HD:&#148;)</i> </dd>
+</dl>
+</dd>
+</dl>
+<p><i>DriveFreeSpace(driveName)</i> </p>
+<dl>
+<dd>Returns the number of bytes free on the specified drive. </dd>
+</dl>
+<p><i>DriveIsCDROM(driveName)</i> </p>
+<dl>
+<dd>Returns 0 if the specified drive is a CD-ROM drive, a negative error code if not. </dd>
+<dd>&#160;</dd>
+<dd><b><i>Windows 3.1 note</i></b><i>: This call is sometimes confused by network drives and will report those as CD-ROM 
+drives. Windows 95/NT does not share this weakness.</i> </dd>
+</dl>
+<p><i>DrivesToList()</i> </p>
+<dl>
+<dd>Returns a Director list of the available drives on the system. This includes drives that are removable and have no 
+media currently mounted. </dd>
+<dd>&#160;</dd>
+<dd><b><i>Macintosh note:</i></b><i> This call was originally named VolumesToList.</i> </dd>
+<dd>&#160;</dd>
+<dd><b><i>Example:</i></b> </dd>
+<dd><i>set dlist to DrivesToList()</i> </dd>
+</dl>
+<p><u>File Functions </u></p>
+<p><i>FileExists(filename)</i> </p>
+<dl>
+<dd>Pass a filename as a character string to this function and it will return 0 if it exists. </dd>
+<dd>&#160;</dd>
+<dd><b><i>Windows note</i></b><i>: You can pass wildcards in the filename string, such as &#147;config.*&#148; and if any matches are 
+found, it will return a 0 (success code).</i> </dd>
+</dl>
+<p><i>RenameFile(oldFilename, newFilename)</i> </p>
+<dl>
+<dd>Pass the names of two files as character strings. No wildcards are allowed in this function. </dd>
+</dl>
+<p><i>DeleteFile(filename)</i> </p>
+<dl>
+<dd>Pass a character string for the filename to delete. </dd>
+<dd>&#160;</dd>
+<dd><b><i>Windows note</i></b><i>: You can pass wildcards to delete multiple files, such as &#147;*.bmp&#148;.</i> </dd>
+</dl>
+<p><i>CopyFile(sourceFilename, destFilename)</i> </p>
+<dl>
+<dd>Pass the names of the source and destination files as character strings. </dd>
+<dd>&#160;</dd>
+<dd><b><i>Windows note</i></b><i>: You can pass wildcards in the sourceFilename argument to copy multiple files, such as 
+&#147;c:\*.bmp&#148;.</i> </dd>
+</dl>
+<p><i>GetFileModDate(filename)</i> </p>
+<dl>
+<dd>This method returns the last modified time &amp; date for the specified file as a 25-character string as follows: &#147;Wed 
+Jan 02 02:03:55 1980\n&#148;. The `\n' is a newline character. Note that the time is in 24-hour format and numbers 
+are zero-padded. </dd>
+</dl>
+<p><b><i>(Windows)</i></b> </p>
+<p><i>FileOpenDialog(initialDir, filterStr, dlogTitle, createPrompt, fileMustExist)</i> </p>
+<p><b><i>(Mac)</i></b> </p>
+<p><i>FileOpenDialog(initialDir, filterStr)</i> </p>
+<dl>
+<dd>This method displays a system &#147;File Open&#148; dialog box which allows the user to select a directory and file to 
+open. The filename selected is returned to the caller as a string INCLUDING THE FULL PATH. If no filename 
+was selected or Cancel was pressed, the empty string (&#147;&#148;) is returned. </dd>
+<dd>&#160;</dd>
+<dd>`initialDir' is the path of the directory where the dialog should be opened. </dd>
+<dd>&#160;</dd>
+<dd>`filterStr' is a string that tells what kind of files to show in the dialog. On Windows, these consist of 
+descriptor/extension pairs separated by `/', such as &#147;Text Files/*.TXT/All Files/*.*&#148;. On the Macintosh, the filters 
+are file `types' separated by `/', such as &#147;TEXT/WORD&#148;. There is no limit to the number of filters on Windows, 
+but you can specify a maximum of four (4) filters on the Macintosh. </dd>
+<dd>&#160;</dd>
+<dd>`dlogTitle' (Windows only) is the title of the Windows dialog. If you pass &#147;&#148;, the title defaults to &#147;Open.&#148; </dd>
+<dd>&#160;</dd>
+<dd>`createPrompt' (Windows only) is a boolean that tells the Windows dialog to prompt the user about creating the 
+file if the file does not already exist. For instance, the user can type the name of a file into the text box; if that file 
+does not exist when they press the &#147;Open&#148; button, a dialog will appear asking them if they wish to create it. If 
+they answer &#147;No&#148;, the Open File dialog stays on the screen. If they answer &#147;Yes&#148;, the filename is returned to the 
+caller. Remember that you can use the FileExists() method to see if the file actually exists or not. </dd>
+<dd>&#160;</dd>
+<dd>`fileMustExist' (Windows only) is a boolean that tells the Windows dialog that a user must either select a file from 
+the list or type the name of an existing file. If they do not, a message will appear asking them to try again. </dd>
+</dl>
+<p><b><i>(Windows)</i></b> </p>
+<p><i>FileSaveAsDialog(initialDir, filename, dlogTitle, overwritePrompt)</i> </p>
+<p><b><i>(Mac)</i></b> </p>
+<p><i>FileSaveAsDialog(initialDir, filename, prompt)</i> </p>
+<dl>
+<dd>This method displays a system &#147;File Save As&#148; dialog box that allows the user to select a directory and type in a 
+filename to save a file under. The full path and the filename are returned to the caller if the Save button was 
+pressed. Otherwise the empty string (&#147;&#148;) is returned if Cancel was pressed. </dd>
+<dd>&#160;</dd>
+<dd>`initialDir' is the path of the directory where the dialog should be opened. </dd>
+<dd>&#160;</dd>
+<dd>`filename' is the name to show initially in the dialog box. The user can change this by typing over it. </dd>
+<dd>&#160;</dd>
+<dd>`prompt' (Macintosh only) is the text that appears above the name of the file. If you leave this blank, it defaults 
+automatically to &#147;Save As:&#148;. </dd>
+<dd>&#160;</dd>
+<dd>`dlogTitle' (Windows only) will be used as the title bar text of the Windows dialog. </dd>
+<dd>&#160;</dd>
+<dd>`overwritePrompt' (Windows only) is a boolean that, when True, brings up a warning dialog if the user types in 
+the name of an existing file and presses the Save button. If this flag is False then no warning is given. </dd>
+</dl>
+<p><u>Directory functions </u></p>
+<p>Note: You don't have to worry about passing `\' or `:' trailing directory separator characters to these functions. They 
+don't care if they are present or not. </p>
+<p><i>DirectoryExists(dirName)</i> </p>
+<dl>
+<dd>Pass a character string and a 0 will be returned if the directory exists. </dd>
+<dd>&#160;</dd>
+<dd><b><i>Example</i></b><i>:</i> </dd>
+<dd><dl>
+<dd><i>set retVal to DirectoryExists(&#147;C:\MYDIR&#148;)</i> </dd>
+</dl>
+</dd>
+<dd><dl>
+<dd><i>if retVal = 0 then</i> </dd>
+</dl>
+</dd>
+<dd><dl>
+<dd><dl>
+<dd><i>alert &#147;Just where you left it!&#148;</i> </dd>
+</dl>
+</dd>
+</dl>
+</dd>
+<dd><dl>
+<dd><i>else</i> </dd>
+</dl>
+</dd>
+<dd><dl>
+<dd><dl>
+<dd><i>alert &#147;You've lost it!&#148;</i> </dd>
+</dl>
+</dd>
+</dl>
+</dd>
+<dd><dl>
+<dd><i>end if</i> </dd>
+</dl>
+</dd>
+</dl>
+<p><i>CreateDirectory(dirName)</i> </p>
+<dl>
+<dd>This function creates a directory. If a directory or file already exists with the given path and name, the function 
+returns an error code (see table below). A 0 is returned if successful. </dd>
+</dl>
+<p><i>DeleteDirectory(dirName)</i> </p>
+<dl>
+<dd>This function will delete an empty directory only. An error code is returned if files or directories are found in the 
+directory to be deleted. </dd>
+</dl>
+<p><i>XDeleteDirectory(dirName)</i> </p>
+<dl>
+<dd>This function is powerful and dangerous. It will perform a &#147;tree walk&#148; to delete not only the target directory given 
+in the dirName argument, but it will also delete all subdirectories and their files. </dd>
+<dd>&#160;</dd>
+<dd><b><i>Caution</i></b><i>! It is possible to erase an entire hard drive with the careless use of this command! Issuing a 
+command such as XDeleteDirectory(&#147;C:\&#148;) will in fact erase drive C:! Be warned!</i> </dd>
+</dl>
+<p><i>CopyDirectory(sourceDirName, destDirName)</i> </p>
+<dl>
+<dd>This command will copy all of the files from the source directory to the destination directory. It will not copy any 
+subdirectories or their files found in the source directory. </dd>
+</dl>
+<p><i>XCopyDirectory(sourceDirName, destDirName)</i> </p>
+<dl>
+<dd>This command does a &#147;tree walk&#148; and copies all files, subdirectories and their files from the source directory to 
+the destination directory. If you need to duplicate an entire directory tree, this command is a real time saver. </dd>
+<dd>&#160;</dd>
+<dd><b><i>Macintosh note</i></b><i>: Invisible files are not copied by this or other file or directory commands.</i> </dd>
+</dl>
+<p><i>DirectoryToList(dirName)</i> </p>
+<dl>
+<dd>This function will create a Director list and place an item in the list for each file and directory found in the given 
+directory name. </dd>
+<dd>&#160;</dd>
+<dd><b><i>Macintosh note</i></b><i>: Macintosh folders found in the given folder have a `:' character appended.</i> </dd>
+<dd>&#160;</dd>
+<dd><b><i>Windows note</i></b><i>: Subdirectories found in the given directory have a `\' character appended.</i> </dd>
+<dd>&#160;</dd>
+<dd><b><i>Example</i></b><i>:</i> </dd>
+<dd><dl>
+<dd><i>set filelist to [ ]</i> </dd>
+</dl>
+</dd>
+<dd><dl>
+<dd><i>set filelist to DirectoryToList(&#147;Macintosh HD:Applications&#148;)</i> </dd>
+</dl>
+</dd>
+</dl>
+<hr>
+<p><b>Error messages:</b> </p>
+<p>The Xtra returns status values from each of its callable functions to let you know if the operation was successful, and if 
+not, why. The following table lists each error code returned by the Xtra. </p>
+<p>The calls that return a string instead of an integer status code are: </p>
+<dl>
+<dd><i>FileOpenDialog</i> </dd>
+<dd><i>FileSaveAsDialog</i> </dd>
+<dd><i>GetFileModDate</i> </dd>
+</dl>
+<p>The calls that return a list instead of an integer status code are: </p>
+<dl>
+<dd><i>DrivesToList</i> </dd>
+<dd><i>DirectoryToList</i> </dd>
+</dl>
+<table border=1>
+<tr><td valign=top><b>return value</b></td><td valign=top><b>error explanation</b></td></tr>
+<tr><td valign=top>0</td><td valign=top>Successful completion</td></tr>
+<tr><td valign=top>-1</td><td valign=top>General error of unknown origin</td></tr>
+<tr><td valign=top>-5</td><td valign=top>File deletion failure</td></tr>
+<tr><td valign=top>-6</td><td valign=top>File rename failure</td></tr>
+<tr><td valign=top>-7</td><td valign=top>File not found</td></tr>
+<tr><td valign=top>-8</td><td valign=top>Specified file is actually a directory</td></tr>
+<tr><td valign=top>-9</td><td valign=top>File creation failure</td></tr>
+<tr><td valign=top>-10</td><td valign=top>File open failure</td></tr>
+<tr><td valign=top>-11</td><td valign=top>File write failure</td></tr>
+<tr><td valign=top>-12</td><td valign=top>File close failure</td></tr>
+<tr><td valign=top>-13</td><td valign=top>File read failure</td></tr>
+<tr><td valign=top>-14</td><td valign=top>Destination disk full</td></tr>
+<tr><td valign=top>-15</td><td valign=top>Directory not found</td></tr>
+<tr><td valign=top>-16</td><td valign=top>Specified directory is actually a file</td></tr>
+<tr><td valign=top>-17</td><td valign=top>Directory creation failure</td></tr>
+<tr><td valign=top>-18</td><td valign=top>Could not delete specified directory</td></tr>
+<tr><td valign=top>-19</td><td valign=top>Could not retrieve directory ID number</td></tr>
+<tr><td valign=top>-40</td><td valign=top>Could not allocate memory for file copy</td></tr>
+<tr><td valign=top>-51</td><td valign=top>Specified drive does not exist</td></tr>
+<tr><td valign=top>-52</td><td valign=top>Specified drive exists but is not mounted</td></tr>
+<tr><td valign=top>-61</td><td valign=top>Specified drive is not a CD-ROM</td></tr>
+<tr><td valign=top>-210</td><td valign=top>New filename already exists or two paths are different</td></tr>
+</table>
+</body>
+
+</html>
