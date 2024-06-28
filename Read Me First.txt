@@ -1,0 +1,24 @@
+Welcome to the CD-ROM supplement to Director 7 and Lingo Authorized!
+
+Note: This disc uses long file names, so it requires Windows 95 or higher or Windows NT 4 or higher.
+
+This disc contains files for use with the Lessons described in the book. There is nothing to install—you can simply open the files from the CD and work with them within Director. If you hate the idea of always needing to have the CD-ROM in the computer when working through the lessons, and you happen to have 100 megabytes of empty hard disk space to spare, you can drag the entire Lessons folder to your hard disk and work with the files there.
+
+Each Lesson has its own folder, and each Lesson folder contains three subfolders, named Start, Media, and Complete. The Start folder contains anything you need to, well, start the Lesson. Any extra files you need to import into your Director file along the way, such as graphics, text, or sounds, are in the Media folder. When you've finished working through the Lesson, compare your resulting movie with the file in the Complete folder. Occasionally, there may be no starting file (the book will tell you how to build one from scratch) or no media to import. For those lessons, the corresponding folders contain only an empty subfolder named, oddly enough, NoFiles.
+
+Happy authoring!
+
+And now, a word from our Publisher:
+
+Peachpit Press warrants this disc to be free of defects in materials and faulty workmanship under normal use for a period of ninety days after purchase. If a defect is discovered in a disc during this warranty period, a replacement disc can be obtained at no charge by sending the defective disc, postage prepaid, to:
+
+Replacement Discs
+Peachpit Press
+1249 8th St.
+Berkeley, CA 94710
+
+After the 90-day period, replacement will be at Peachpit’s discretion.
+
+Peachpit Press makes no warranty or representation, either express or implied, with respect to this software, its quality, performance, merchantability, or fitness for a particular purpose. In no event will Peachpit Press, its distributors, or dealers be liable for direct, indirect, special, incidental or consequential damages arising our of the use or inability to use the software. The exclusion of implied warranties is not permitted in some states. Therefore, the above exclusion may not apply to you. This warranty provides you with specific legal rights. There may be other rights that you may have that vary from state to state.
+
+© 1999 Peachpit Press. All Rights Reserved.
