@@ -1,0 +1,228 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0064)http://www.director-online.com/howTo/handy_articles/handy98.html -->
+<HTML><HEAD><TITLE>Multimedia Handyman Number 98</TITLE>
+<META content="pixelgeek design &amp; communications" name=Author>
+<META content="text/html; charset=iso-8859-1" http-equiv=Content-Type>
+<META content="MSHTML 5.00.2614.3401" name=GENERATOR></HEAD>
+<BODY aLink=#ff0000 bgColor=#ffffff link=#ff0000 vLink=#770000>
+<TABLE border=0 cellPadding=0 cellSpacing=0 width=495>
+  <TBODY>
+  <TR>
+    <TD vAlign=top><IMG border=0 height=31 src="handy98_files/handyman.gif" 
+      width=213> 
+      <TABLE border=0 cellPadding=0 cellSpacing=0 width=495>
+        <TBODY>
+        <TR>
+          <TD vAlign=top width=440><IMG align=bottom border=0 height=9 
+            src="handy98_files/archiveDivLine.gif" width=440></TD>
+          <TD rowSpan=2 vAlign=top width=55><A 
+            href="http://www.director-online.com/archive.cfm?pSection=Multimedia%20Handyman"><IMG 
+            align=bottom border=0 height=28 src="handy98_files/archiveDiv.gif" 
+            width=55></A></TD></TR>
+        <TR>
+          <TD vAlign=top width=440>
+            <P><B><FONT color=#cc0000 face="Arial, Helvetica, sans-serif">Dear 
+            Multimedia Handyman</FONT></B> 
+</P></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>
+<TABLE border=0 cellPadding=0 cellSpacing=0 width=495>
+  <TBODY>
+  <TR>
+    <TD><BR>
+      <P>I think the term for what I am trying to do is called a countdown bar 
+      or an energy bar. It will be a graphic which will go down in size as time 
+      elapses. Can you help? 
+      <P>Mike Oscar <MIKE.OSCAR@JKD.CO.UK>
+      <P>Dear Mike, 
+      <P>What you're describing sounds like a progress bar -- similar to what 
+      you see when you're downloading a file or installing a program. The 
+      difference is that you want the progress tied to time (rather than bytes 
+      downloaded) and you want the bar to shrink over time, rather than grow. 
+      You don't mention whether the bar will be horizontal or vertical, so I'll 
+      just create something that works either way. 
+      <P>Let's think about what we want the author (you) to be able to specify 
+      when you drop it on a sprite. Obviously, you'll want to enter the number 
+      of seconds. You want to say whether the bar is oriented horizontally or 
+      vertically. And, although in this instance you want it to shrink, let's 
+      add an option so that the bar can either increase or decrease in size. 
+      Here's what it should look like. 
+      <P><IMG alt="" border=0 height=130 src="handy98_files/handy98.gif" 
+      width=374> 
+      <P>And here's what the final result could look like. 
+      <P>
+      <OBJECT classid=clsid:166B1BCA-3F9C-11CF-8075-444553540000 
+      codeBase=http://active.macromedia.com/director/cabs/sw.cab#version=6,0,1,0 
+      height=240 width=320><PARAM NAME="SRC" VALUE="../other/handy98.dcr"><PARAM NAME="swRemote" VALUE="swTarget='false'"><PARAM NAME="swLiveConnect" VALUE="FALSE">
+      <embed src="../other/handy98.dcr"
+      pluginspage="http://www.macromedia.com/shockwave/download/" 
+      type="application/x-director" width="320" height="240" 
+      swLiveConnect="FALSE"  swRemote="swTarget='false'"></embed> </OBJECT>
+      <P>A sample movie is available for download in <A 
+      href="http://www.director-online.com/howTo/other/handy98.hqx">Mac</A> or 
+      <A href="http://www.director-online.com/howTo/other/handy98.zip">PC</A> 
+      format 
+      <P>So how do we make it work? Everything you're seeing in the demo above 
+      is handled by one behavior, which I'm calling the "progressBar timer". 
+      Here's the concept in a nutshell: as soon as the sprite comes into 
+      existence, it starts a timer. It also checks its own width (or height, if 
+      the bar is vertical). Then, at each frame after that (until the specified 
+      amount of time as elapsed) it calculates how much time has passed as a 
+      percentage of the total time specified. This percentage is then applied to 
+      the original width of the sprite to yeild a graphic representation of the 
+      time. 
+      <P>In our beginSprite handler, we'll need to initialize values for several 
+      properties of the sprite: width, height, and sprite number. We'll also 
+      convert the seconds to ticks (60ths of a second) so that our calculations 
+      will be more precise. We'll then record the starting time (in ticks). 
+      Finally, we need to add this behavior instance to the actorList. What the 
+      heck does that mean? 
+      <P>The actorList is a feature used mostly by people who are doing higher 
+      level object oriented programming. But it's very easy to use, once you 
+      grasp the concept. Here's how it works and why you'd want to use it. 
+      <P>In our example, we want the behavior to update its size every frame. So 
+      we could just use an enterFrame, exitFrame or prepareFrame handler for 
+      that. Right? Well... almost. In actuality, we want the behavior to update 
+      its size every frame... <B>until the full time has elapsed.</B> After the 
+      time has elapsed, there's no need to waste the processor's time by going 
+      through that handler anymore. Alot of times, I use a "flag" property to 
+      act as a switch, but that's a little inefficient because the behavior 
+      still has to check the status of the flag every frame -- even if it is 
+      "off". 
+      <P>Instead, we can use "the actorList". Any object which is contained in 
+      the actorList automatically gets a prompt from Director every frame. The 
+      prompt is called "stepFrame". It's as if on every frame, Director looks in 
+      the actorList. If it sees "Bob" in the actorlist, it says "Hey Bob, 
+      execute that stepFrame handler!". 
+      <P>So, what we'll do is add this behavior to the list in the beginSprite 
+      handler. Then, after the time has elapsed, the behavior will delete itself 
+      from the actorList and it won't get the prompt to stepFrame anymore. The 
+      main guts of our behavior will be executed in the stepFrame handler. <PRE><FONT color=#cc0000>property pSecs, pTotalTicks, pWidth, pHeight, pSprite
+property pStartTicks, pDirection, pOrientation
+
+<B>on beginSprite me</B>
+
+  pSprite = sprite(me.spriteNum)
+  pWidth = pSprite.width
+  pHeight = pSprite.height
+  pTotalTicks = pSecs * 60
+  pStartTicks = the timer
+  add the actorList, me
+  
+end beginSprite
+
+<B>on stepFrame me</B>
+
+  if the timer &gt; pStartTicks + pTotalTicks then
+  
+    if pDirection = #increase then
+      pSprite.width = pWidth
+      pSprite.height = pHeight
+    else
+      pSprite.width = 0
+      pSprite.height = 0
+    end if
+	
+    deleteOne the actorList, me
+    -- do whatever else you want
+    beep
+	
+  else 
+  
+    timeElapsed = the timer - pStartTicks
+    percentTime = (timeElapsed * 1.0000/pTotalTicks)
+	
+    if pDirection = #increase then
+      if pOrientation = #horizontal then
+        pSprite.width = percentTime * pWidth
+      else
+        pSprite.height = percentTime * pHeight
+      end if
+    else
+      if pOrientation = #horizontal then
+        pSprite.width = pWidth - (percentTime * pWidth)
+      else
+        pSprite.height = pHeight - (percentTime * pHeight)
+      end if
+	  
+    end if
+	
+  end if
+  
+end stepFrame
+
+<B>on endSprite me</B>
+  deleteOne the actorList, me
+end endSprite
+
+<B>on getPropertyDescriptionList me</B>
+
+  set pdlist to [:]
+  myWidth = sprite(the currentSpriteNum).member.width
+  myHeight = sprite(the currentSpriteNum).member.height
+  
+  if myHeight &gt; myWidth then
+    defOrientation = #vertical
+  else
+    defOrientation = #horizontal
+  end if
+  
+  addprop pdlist, #pSecs, [#comment:"How many seconds?", ¬
+    #format:#integer, #default:30]
+  addprop pdlist, #pDirection, [#comment:"Count which way?", ¬
+    #format:#symbol, #default:#increase, #range:[#increase,#decrease]]
+  addprop pdlist, #pOrientation, [#comment:"Orientation?", #format:¬
+    #symbol, #default:defOrientation, #range:[#horizontal,#vertical]]
+  
+  return pdlist
+  
+end getPropertyDescriptionList</FONT></PRE>
+      <P>The stepFrame handler isn't very complicated. It looks about twice as 
+      long as necessary because I've included the option for the bar to be 
+      oriented vertically. So, for every command to change the size of the bar, 
+      there's an if statement that checks the pOrientation property and then 
+      issues the appropriate command to adjust either the width or height. 
+      <P>The first thing the stepFrame handler does is check to see if the full 
+      time has elapsed. If so, it checks to see if the bar was counting up or 
+      down and then sets the sprite to its full width/height, or to 0. And then 
+      it does something very important: it removes itself from the actorList. 
+      After that, you can insert whatever else you want to happen when time has 
+      elapsed. I've included a "beep" just to show you where to insert your 
+      additional instructions. 
+      <P>If the time has not fully elapsed, then it does the percentage 
+      calculation, comparing ticks elapsed to total ticks specified. This 
+      percentage is then applied to the width/height -- either positively or 
+      negatively (depending on whether it's counting up or down.) 
+      <P>Here's an interesting thing about the actorList. Once you add the 
+      behavior to the actorList, it will remain in existence even if the sprite 
+      goes away. So, if you start this behavior and it gets added to the 
+      actorList, it will persist even if you move to another place in the score 
+      -- or ever to another movie. That could screw you up if you didn't realize 
+      what was happening. Therefore, I've included the endSprite handler that 
+      deletes it from the actorList. 
+      <P>One final thing to note is the getPropertyDescriptionList handler. For 
+      pOrientation and pDirection, I wanted to have 2 specific choices. For 
+      example, the orientation can only be either horizontal or vertical, and 
+      it's great to have these choices on a pulldown menu. To do that, specify a 
+      #range as a list [#horizontal, #vertical]. I went one step further. I 
+      wanted the behavior to be smart enough to guess whether the orientation 
+      should be vertical or horizontal. So, instead of specifying one or the 
+      other as the default, I used a variable called defOrientation. 
+      <P>The first few lines of the gpdl handler compare the width and height of 
+      the member in the current sprite. If height is more than width, then it 
+      guesses that the defOrientation should be #vertical. Otherwise, it's 
+      #horizontal. Try this feature for yourself by dropping the behavior first 
+      onto a wide sprite, then onto a tall one. The default in the dialog box 
+      will know which way to go -- though you can override it, of course. 
+      <P>One last note. In my demo, the horizontal bars are "anchored" to the 
+      left side, and the vertical bars are locked to the bottom of the range. 
+      You can change this by resetting the regPoint of the cast member. In the 
+      demo above, the horizontal cast member has a regPoint of point(0,0) -- top 
+      left. The vertical members have a regPoint set to the bottom left corner. 
+      Play with the regPoint to come up with variations which meet your needs. 
+      <P>Good luck with your project. 
+      <P><FONT size=-1>Send your questions to the <A 
+      href="mailto:handyman@director-online.com">Handyman</A>. Questions will be 
+      selected on the basis of general applicability. For prompt replies to 
+      specific questions, post your inquiries in the <A 
+      href="http://www.director-online.com/help_central/Display.html" 
+      target=display>Help Central</A> section of DOUG.</FONT> 
+</P></TD></TR></TBODY></TABLE></BODY></HTML>
